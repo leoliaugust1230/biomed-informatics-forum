@@ -1,0 +1,1155 @@
+<title>Biomedical Informatics Forum 2026</title>
+
+<style id="css">
+  :root {
+    --bg:#EEF1F0; --surface:#FFFFFF; --surface-2:#F6F8F7;
+    --ink:#101E1C; --ink-2:#3A4B48; --muted:#566865;
+    --line:#D5DDDB; --line-strong:#B4C1BE;
+    --accent:#0C5A52; --accent-hover:#0A4B44; --accent-ink:#FFFFFF; --accent-soft:#DEEBE8;
+    --brass:#8A5E12; --brass-soft:#F3E9D6;
+    --edit:#7A4BC4; --edit-soft:#EFE8FA;
+    --shadow:0 1px 2px rgba(16,30,28,.05), 0 8px 24px -12px rgba(16,30,28,.16);
+    --trace:12, 90, 82;
+    --font-display:"Iowan Old Style", Charter, "Bitstream Charter", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono:ui-monospace, "SF Mono", SFMono-Regular, Menlo, "IBM Plex Mono", "Roboto Mono", Consolas, monospace;
+    --wrap:1080px; --r:3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#0A1413; --surface:#0F1D1B; --surface-2:#142524;
+      --ink:#E7EFEC; --ink-2:#B6C6C2; --muted:#879B97;
+      --line:#23332F; --line-strong:#354945;
+      --accent:#55C3B0; --accent-hover:#6ED2C0; --accent-ink:#05201C; --accent-soft:#11312C;
+      --brass:#DCAE60; --brass-soft:#2A2315;
+      --edit:#B79BEA; --edit-soft:#221A33;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+      --trace:85, 195, 176;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0A1413; --surface:#0F1D1B; --surface-2:#142524;
+    --ink:#E7EFEC; --ink-2:#B6C6C2; --muted:#879B97;
+    --line:#23332F; --line-strong:#354945;
+    --accent:#55C3B0; --accent-hover:#6ED2C0; --accent-ink:#05201C; --accent-soft:#11312C;
+    --brass:#DCAE60; --brass-soft:#2A2315;
+    --edit:#B79BEA; --edit-soft:#221A33;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+    --trace:85, 195, 176;
+  }
+
+  * { box-sizing:border-box; }
+  img { max-width:100%; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--font-body); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1, h2, h3 { font-family:var(--font-display); font-weight:600; text-wrap:balance; margin:0; line-height:1.15; }
+  p { margin:0; }
+  a { color:var(--accent); }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  .wrap { width:100%; max-width:var(--wrap); margin:0 auto; padding:0 24px; }
+  .eyebrow { font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0; }
+
+  .top { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .top-in { display:flex; align-items:center; gap:24px; height:60px; }
+  .mark { font-family:var(--font-mono); font-size:12px; letter-spacing:.16em; font-weight:600; color:var(--ink); text-decoration:none; white-space:nowrap; }
+  .mark span { color:var(--accent); }
+  .top-nav { display:flex; gap:22px; margin-left:auto; }
+  .top-nav a { font-size:14px; color:var(--ink-2); text-decoration:none; padding:4px 0; border-bottom:1px solid transparent; }
+  .top-nav a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  @media (max-width:860px) { .top-nav { display:none; } .top-in { justify-content:space-between; } }
+
+  .btn { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:11px 18px; border-radius:var(--r); text-decoration:none; border:1px solid var(--accent); background:var(--accent); color:var(--accent-ink); transition:background .15s ease; white-space:nowrap; cursor:pointer; }
+  .btn:hover { background:var(--accent-hover); border-color:var(--accent-hover); }
+  .btn-ghost { background:transparent; color:var(--accent); }
+  .btn-ghost:hover { background:var(--accent-soft); }
+  .btn-sm { padding:8px 14px; font-size:11px; }
+
+  .hero { position:relative; overflow:hidden; border-bottom:1px solid var(--line); }
+  #trace { position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none; }
+  .hero-in { position:relative; padding:78px 0 64px; }
+  .hero h1 { font-size:clamp(38px, 6.2vw, 68px); letter-spacing:-.018em; margin:16px 0 0; max-width:16ch; }
+  .hero h1 em { font-style:normal; color:var(--accent); }
+  .hero-dek { margin-top:22px; max-width:60ch; font-size:19px; color:var(--ink-2); }
+  .hero-cta { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; align-items:center; }
+  .cta-note { font-family:var(--font-mono); font-size:11px; color:var(--muted); letter-spacing:.04em; }
+
+  .facts { display:grid; grid-template-columns:repeat(4, 1fr); border-top:1px solid var(--line); background:var(--surface); }
+  .fact { padding:20px 24px; border-right:1px solid var(--line); }
+  .fact:last-child { border-right:0; }
+  .fact .fact-l { font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px; }
+  .fact .fact-v { margin:0; font-size:15px; line-height:1.4; color:var(--ink); }
+  .fact .fact-v.b { font-weight:600; }
+  @media (max-width:860px) { .facts { grid-template-columns:repeat(2, 1fr); } .fact:nth-child(2n) { border-right:0; } .fact:nth-child(n+3) { border-top:1px solid var(--line); } }
+  @media (max-width:520px) { .facts { grid-template-columns:1fr; } .fact { border-right:0; } .fact + .fact { border-top:1px solid var(--line); } }
+
+  .sec { padding:76px 0; border-bottom:1px solid var(--line); }
+  .sec-alt { background:var(--surface); }
+  .sec-head { max-width:62ch; margin-bottom:44px; }
+  .sec-head h2 { font-size:clamp(26px, 3.4vw, 36px); letter-spacing:-.012em; margin:12px 0 0; }
+  .sec-head p { margin-top:14px; color:var(--ink-2); }
+
+  .grid-4 { display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .card { background:var(--surface); padding:30px 28px 32px; display:flex; flex-direction:column; gap:12px; position:relative; }
+  .sec-alt .card { background:var(--bg); }
+  .card-time { font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--brass); font-variant-numeric:tabular-nums; }
+  .card h3 { font-size:22px; letter-spacing:-.008em; }
+  .card p.card-body { color:var(--ink-2); font-size:15.5px; }
+  .card-tag { margin-top:auto; padding-top:14px; font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  @media (max-width:760px) { .grid-4 { grid-template-columns:1fr; } }
+
+  .agenda { border-top:1px solid var(--line-strong); }
+  .slot { display:grid; grid-template-columns:104px 1fr; gap:0 28px; padding:20px 0; border-bottom:1px solid var(--line); position:relative; }
+  .slot-time { font-family:var(--font-mono); font-size:13px; font-variant-numeric:tabular-nums; color:var(--ink); letter-spacing:.02em; padding-top:3px; }
+  .slot-body { display:flex; flex-direction:column; gap:5px; }
+  .slot-title { font-size:17px; font-weight:600; letter-spacing:-.005em; }
+  .slot-note { font-size:14.5px; color:var(--muted); }
+  .slot-dur { font-family:var(--font-mono); font-size:11px; color:var(--muted); letter-spacing:.06em; margin-top:2px; }
+  .slot-key { border-left:2px solid var(--accent); margin-left:-20px; padding-left:18px; }
+  .slot-key .slot-title { color:var(--accent); }
+  @media (max-width:620px) { .slot { grid-template-columns:1fr; gap:6px; } .slot-key { margin-left:0; padding-left:14px; } }
+
+  .tiers { display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; }
+  .tier { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:30px 28px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow); position:relative; }
+  .sec-alt .tier { background:var(--bg); }
+  .tier-name { font-family:var(--font-display); font-size:21px; font-weight:600; }
+  .tier-price-row { display:flex; align-items:baseline; gap:8px; }
+  .tier-price { font-family:var(--font-mono); font-size:40px; font-weight:600; color:var(--accent); letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1; }
+  .tier-cur { font-family:var(--font-mono); font-size:12px; color:var(--muted); letter-spacing:.08em; }
+  .tier-who { font-size:15px; color:var(--ink-2); }
+  .tier ul { margin:4px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .tier li { position:relative; padding-left:22px; font-size:15px; color:var(--ink-2); }
+  .tier li::before { content:""; position:absolute; left:0; top:9px; width:9px; height:1px; background:var(--accent); }
+  .tier .btn { margin-top:8px; align-self:flex-start; }
+  @media (max-width:700px) { .tiers { grid-template-columns:1fr; } }
+
+  .fineprint { margin-top:22px; font-size:14px; color:var(--muted); max-width:66ch; }
+
+  .sponsor { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:40px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:40px; box-shadow:var(--shadow); position:relative; }
+  .sec-alt .sponsor { background:var(--bg); }
+  .sponsor + .sponsor { margin-top:20px; }
+  .sponsor-badge { display:inline-block; font-family:var(--font-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass); background:var(--brass-soft); border:1px solid color-mix(in srgb, var(--brass) 32%, transparent); padding:5px 11px; border-radius:100px; }
+  .sponsor-name { font-family:var(--font-display); font-size:clamp(30px, 4vw, 42px); font-weight:600; letter-spacing:-.015em; margin:18px 0 0; }
+  .sponsor-name a { color:var(--ink); text-decoration:none; border-bottom:2px solid var(--accent); }
+  .sponsor-name a:hover { color:var(--accent); }
+  .sponsor-quote { font-size:17px; color:var(--ink-2); }
+  .sponsor-stats { display:flex; flex-wrap:wrap; gap:28px; margin-top:22px; }
+  .stat b { display:block; font-family:var(--font-mono); font-size:24px; color:var(--accent); font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+  .stat span { font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  @media (max-width:800px) { .sponsor { grid-template-columns:1fr; gap:28px; padding:30px; } }
+
+  .table-scroll { overflow-x:auto; margin-top:40px; border:1px solid var(--line); border-radius:var(--r); }
+  table { width:100%; border-collapse:collapse; font-size:15px; min-width:560px; background:var(--surface); }
+  .sec-alt table { background:var(--bg); }
+  th, td { text-align:left; padding:14px 20px; border-bottom:1px solid var(--line); }
+  th { font-family:var(--font-mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); font-weight:500; background:var(--surface-2); }
+  tr:last-child td { border-bottom:0; }
+  td.num { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
+  tr.is-taken td { color:var(--muted); }
+  .taken-pill { font-family:var(--font-mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--brass); border:1px solid color-mix(in srgb, var(--brass) 40%, transparent); padding:2px 7px; border-radius:100px; margin-left:8px; white-space:nowrap; }
+
+  .people { display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .person { background:var(--surface); padding:22px 20px; position:relative; }
+  .sec-alt .person { background:var(--bg); }
+  .person b { display:block; font-size:16px; font-weight:600; letter-spacing:-.005em; }
+  .person span { font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; }
+  @media (max-width:860px) { .people { grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:460px) { .people { grid-template-columns:1fr; } }
+
+  .past { display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
+  .past-col { position:relative; }
+  .past-col ul { margin:12px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px; }
+  .past-col li { font-size:15px; color:var(--ink-2); position:relative; }
+  .past-col li i { font-style:normal; color:var(--muted); font-size:13.5px; }
+  @media (max-width:800px) { .past { grid-template-columns:1fr; gap:32px; } }
+
+  .faq { display:grid; grid-template-columns:repeat(2, 1fr); gap:28px 44px; }
+  .faq-item { position:relative; }
+  .faq h3 { font-size:17px; margin-bottom:7px; }
+  .faq p { color:var(--ink-2); font-size:15.5px; }
+  @media (max-width:760px) { .faq { grid-template-columns:1fr; } }
+
+  .foot { padding:54px 0 96px; border-bottom:0; }
+  .foot-in { display:flex; flex-wrap:wrap; gap:32px; justify-content:space-between; align-items:flex-start; }
+  .foot p { font-size:14.5px; color:var(--muted); max-width:46ch; }
+  .foot a { color:var(--accent); }
+  .foot-mark { font-family:var(--font-display); font-size:20px; font-weight:600; margin-bottom:10px; }
+
+  /* ================= edit mode ================= */
+  #bar {
+    position:fixed; z-index:200; left:0; right:0; margin:0 auto; width:fit-content; bottom:20px;
+    display:none; align-items:center; gap:8px;
+    background:var(--surface); border:1px solid var(--line-strong);
+    border-radius:100px; padding:8px 10px 8px 16px;
+    box-shadow:0 6px 28px -8px rgba(0,0,0,.35);
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    max-width:calc(100vw - 32px); flex-wrap:wrap; justify-content:center;
+  }
+  body.can-edit #bar { display:flex; }
+  #bar .pill { color:var(--muted); white-space:nowrap; }
+  #bar button {
+    font-family:inherit; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    border-radius:100px; padding:8px 15px; cursor:pointer; border:1px solid transparent; white-space:nowrap;
+  }
+  .b-edit { background:var(--edit); color:#fff; border-color:var(--edit) !important; }
+  .b-save { background:var(--accent); color:var(--accent-ink); border-color:var(--accent) !important; }
+  .b-plain { background:transparent; color:var(--ink-2); border-color:var(--line-strong) !important; }
+  .b-plain:hover { background:var(--surface-2); }
+  #bar button[disabled] { opacity:.5; cursor:default; }
+
+  body.editing [data-bind] { cursor:text; }
+  body.editing [data-bind]:hover { box-shadow:0 0 0 1px var(--edit); border-radius:2px; }
+  body.editing [data-bind]:focus { outline:2px solid var(--edit); outline-offset:2px; border-radius:2px; background:var(--edit-soft); }
+  body.editing [data-bind]:empty::after { content:"empty"; color:var(--edit); opacity:.6; font-style:italic; }
+
+  .tools { display:none; position:absolute; top:6px; right:6px; gap:4px; z-index:5; }
+  body.editing .tools { display:flex; }
+  .tools button, .add-btn {
+    font-family:var(--font-mono); font-size:10px; letter-spacing:.06em;
+    background:var(--surface); color:var(--edit); border:1px solid var(--edit);
+    border-radius:100px; width:22px; height:22px; line-height:1; padding:0; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .tools button:hover { background:var(--edit); color:#fff; }
+  .add-row { display:none; margin-top:14px; }
+  body.editing .add-row { display:block; }
+  .add-btn { width:auto; height:auto; padding:7px 14px; text-transform:uppercase; }
+  .add-btn:hover { background:var(--edit); color:#fff; }
+
+  .li-row { display:flex; align-items:flex-start; gap:8px; }
+  .li-row .tools { display:none; position:static; }
+  body.editing .li-row .tools { display:flex; }
+
+  #settings { display:none; margin-bottom:34px; padding:22px 24px; border:1px dashed var(--edit); border-radius:var(--r); background:var(--edit-soft); }
+  body.editing #settings { display:block; }
+  #settings .f { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px; }
+  #settings .f:last-child { margin-bottom:0; }
+  #settings label { font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); min-width:150px; }
+  #settings input { flex:1; min-width:240px; font-family:var(--font-mono); font-size:13px; padding:8px 11px; border:1px solid var(--line-strong); border-radius:var(--r); background:var(--surface); color:var(--ink); }
+
+  #toast {
+    position:fixed; z-index:300; left:0; right:0; margin:0 auto; width:fit-content; bottom:86px;
+    background:var(--ink); color:var(--bg); font-family:var(--font-mono); font-size:12px;
+    padding:10px 18px; border-radius:100px; opacity:0; pointer-events:none; transition:opacity .2s ease;
+    max-width:calc(100vw - 32px); text-align:center;
+  }
+  #toast.show { opacity:1; }
+
+  @media (max-width:640px) {
+    #bar .pill { display:none; }
+    #bar button { padding:8px 12px; }
+  }
+  @media print { #bar, #toast, .tools, .add-row, #settings { display:none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+</style>
+
+<div id="root"></div>
+
+<div id="bar" role="toolbar" aria-label="Page editing">
+  <span class="pill" id="bar-status">Editable</span>
+  <button class="b-edit" id="b-toggle" type="button">Edit page</button>
+  <button class="b-save" id="b-save" type="button" hidden>Save &amp; publish</button>
+  <button class="b-plain" id="b-cancel" type="button" hidden>Discard</button>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script type="application/json" id="state">
+{
+ "meta": {
+  "title": "Biomedical Informatics Forum 2026",
+  "regUrl": "https://www.eventbrite.com/o/international-forum-on-biomedical-informatics-108687647861",
+  "email": "leoliaugust1230@gmail.com",
+  "wordmark": "IFBDSAI",
+  "wordmarkYear": "/ 2026"
+ },
+ "nav": [
+  {
+   "label": "Program",
+   "href": "#program"
+  },
+  {
+   "label": "Agenda",
+   "href": "#agenda"
+  },
+  {
+   "label": "Register",
+   "href": "#register"
+  },
+  {
+   "label": "Sponsor",
+   "href": "#sponsor"
+  },
+  {
+   "label": "Venue",
+   "href": "#venue"
+  }
+ ],
+ "hero": {
+  "eyebrow": "Satellite forum \u00b7 AMIA 2026 Annual Symposium \u00b7 Dallas",
+  "title": "International Forum on Biomedical Informatics,",
+  "titleAccent": "Data Science, and AI",
+  "dek": "A half-day forum and reception for the informatics community, held on the opening Saturday of AMIA. This year the program is built around the four questions people actually corner each other about in the hallway: industry or academia, what editors want, where the grant money is going, and who is hiring.",
+  "ctaPrimary": "Register \u2014 $20 / $200",
+  "ctaSecondary": "See the agenda",
+  "ctaNote": "150 seats \u00b7 registration closes when full"
+ },
+ "facts": [
+  {
+   "label": "Date",
+   "lines": [
+    {
+     "t": "Saturday, November 7, 2026",
+     "b": true
+    },
+    {
+     "t": "3:00 \u2013 7:30 PM CT",
+     "b": false
+    }
+   ]
+  },
+  {
+   "label": "Venue",
+   "lines": [
+    {
+     "t": "Sheraton Suites Market Center",
+     "b": true
+    },
+    {
+     "t": "Oaks Ballroom, Dallas, TX",
+     "b": false
+    }
+   ]
+  },
+  {
+   "label": "Registration",
+   "lines": [
+    {
+     "t": "$20 students, postdocs & assistant professors",
+     "b": true
+    },
+    {
+     "t": "$200 faculty & industry",
+     "b": true
+    }
+   ]
+  },
+  {
+   "label": "Gold Sponsor",
+   "lines": [
+    {
+     "t": "OneSource Cloud",
+     "b": true
+    },
+    {
+     "t": "Private AI infrastructure",
+     "b": false
+    }
+   ]
+  }
+ ],
+ "program": {
+  "eyebrow": "This year\u2019s program",
+  "heading": "Four sessions, no filler",
+  "intro": "Every session this year is a working session: people who make the decisions, answering the questions in front of the room. Panelists are confirmed on a rolling basis and announced here as they are locked in.",
+  "cards": [
+   {
+    "time": "3:10 \u2013 3:55 PM",
+    "title": "Industry vs. Academia",
+    "body": "Two tracks compared honestly by people who have worked in both: the pace, the autonomy, the compensation, the kind of problems you get to own \u2014 and what it actually costs to cross over in either direction.",
+    "tag": "Panel discussion"
+   },
+   {
+    "time": "3:55 \u2013 4:35 PM",
+    "title": "Meet the Editors",
+    "body": "Invited editors from the field\u2019s leading journals on what gets desk-rejected and why, what separates a competitive submission from a merely correct one, and how review is adapting to AI-heavy manuscripts.",
+    "tag": "Invited journal editors"
+   },
+   {
+    "time": "4:45 \u2013 5:25 PM",
+    "title": "Grant Trends",
+    "body": "Where the funding is moving: shifting NIH priorities, AI-specific mechanisms, and how study sections are reading informatics proposals differently than they did three years ago.",
+    "tag": "Funding landscape"
+   },
+   {
+    "time": "5:25 \u2013 6:10 PM",
+    "title": "Hiring Pitches",
+    "body": "Labs, health systems, and companies with open roles get the floor for a short pitch \u2014 what they work on, who they need, how to apply. Bring your CV; the reception starts immediately after.",
+    "tag": "Lightning talks \u00b7 open roles"
+   }
+  ]
+ },
+ "agenda": {
+  "eyebrow": "Saturday, November 7, 2026 \u00b7 all times CT",
+  "heading": "Agenda",
+  "intro": "Doors open at 2:45 PM. The reception runs to 7:30 PM \u2014 most people stay for it.",
+  "slots": [
+   {
+    "time": "2:45 PM",
+    "title": "Check-in & registration",
+    "note": "Oaks Ballroom foyer. On-site payment accepted.",
+    "dur": "",
+    "key": false
+   },
+   {
+    "time": "3:00 PM",
+    "title": "Opening remarks",
+    "note": "",
+    "dur": "10 min",
+    "key": false
+   },
+   {
+    "time": "3:10 PM",
+    "title": "Panel \u2014 Industry vs. Academia",
+    "note": "Panelists to be announced",
+    "dur": "45 min \u00b7 incl. audience Q&A",
+    "key": true
+   },
+   {
+    "time": "3:55 PM",
+    "title": "Meet the Editors",
+    "note": "Invited journal editors \u00b7 to be announced",
+    "dur": "40 min",
+    "key": true
+   },
+   {
+    "time": "4:35 PM",
+    "title": "Break",
+    "note": "Complimentary water station",
+    "dur": "10 min",
+    "key": false
+   },
+   {
+    "time": "4:45 PM",
+    "title": "Grant Trends & the funding landscape",
+    "note": "Speakers to be announced",
+    "dur": "40 min",
+    "key": true
+   },
+   {
+    "time": "5:25 PM",
+    "title": "Hiring pitches",
+    "note": "Recruiting labs and companies \u00b7 sign up by email to pitch",
+    "dur": "45 min",
+    "key": true
+   },
+   {
+    "time": "6:10 PM",
+    "title": "Networking reception",
+    "note": "Beer, wine and refreshments \u00b7 hosted by OneSource Cloud",
+    "dur": "until 7:30 PM",
+    "key": false
+   }
+  ]
+ },
+ "register": {
+  "eyebrow": "Registration",
+  "heading": "Same two rates as last year",
+  "intro": "Both rates cover the entire program and the reception. The difference is eligibility, not access \u2014 the trainee rate is subsidized so that students, postdocs and junior faculty are in the room.",
+  "tiers": [
+   {
+    "name": "Students, Postdocs & Assistant Professors",
+    "price": "$20",
+    "cur": "USD",
+    "who": "For anyone currently enrolled, in a postdoctoral appointment, or holding an assistant professor appointment.",
+    "items": [
+     "Full program, all four sessions",
+     "Networking reception",
+     "One beverage included",
+     "Eligible to pitch during the hiring session"
+    ],
+    "cta": "Register at $20"
+   },
+   {
+    "name": "Faculty & Industry",
+    "price": "$200",
+    "cur": "USD",
+    "who": "For associate and full faculty, and for attendees registering from industry.",
+    "items": [
+     "Full program, all four sessions",
+     "Networking reception",
+     "One beverage included",
+     "Eligible to pitch during the hiring session"
+    ],
+    "cta": "Register at $200"
+   }
+  ],
+  "fineprint": "Refreshments at the reception are served first come, first served. On-site registration is available at the door while seats remain, but the room caps at 150 and last year\u2019s forum filled \u2014 registering ahead is the safer bet. To pitch a role during the hiring session, email the organizers by October 24."
+ },
+ "sponsor": {
+  "eyebrow": "Supported by",
+  "heading": "Our sponsors",
+  "list": [
+   {
+    "badge": "Gold Sponsor",
+    "name": "OneSource Cloud",
+    "url": "https://www.onesourcecloud.net",
+    "quote": "\u201cBuild, operate, and scale enterprise AI on secure, high-performance private infrastructure.\u201d",
+    "blurb": "OneSource Cloud designs, deploys and manages dedicated GPU infrastructure for organizations that need compliant AI environments \u2014 including healthcare, life sciences and academic research. They are hosting this year\u2019s networking reception.",
+    "linkText": "onesourcecloud.net",
+    "stats": [
+     {
+      "v": "94+",
+      "l": "Data centers"
+     },
+     {
+      "v": "50+",
+      "l": "Countries"
+     },
+     {
+      "v": "20+",
+      "l": "Years operating"
+     }
+    ]
+   }
+  ],
+  "tiersEyebrow": "Become a sponsor",
+  "tiersHeading": "Two tiers remain for 2026",
+  "tiersIntro": "Sponsorship funds the venue, the catering and the subsidized trainee rate. To reserve a tier, email",
+  "rows": [
+   {
+    "tier": "Bronze",
+    "fee": "$2,500",
+    "benefits": "Brand placement on this site; digital exposure through event communications",
+    "regs": "2",
+    "taken": false
+   },
+   {
+    "tier": "Silver",
+    "fee": "$3,500",
+    "benefits": "All Bronze benefits; prominent website branding; dedicated exhibitor desk",
+    "regs": "4",
+    "taken": false
+   },
+   {
+    "tier": "Gold",
+    "fee": "$5,000",
+    "benefits": "All Silver benefits; premium website, signage and social visibility; presentation opportunity; VIP networking dinner invitation",
+    "regs": "6",
+    "taken": true
+   }
+  ]
+ },
+ "committee": {
+  "eyebrow": "Organizing committee",
+  "heading": "Who puts this on",
+  "people": [
+   {
+    "name": "Hua Xu",
+    "org": "Yale"
+   },
+   {
+    "name": "Cui Tao",
+    "org": "Mayo Clinic"
+   },
+   {
+    "name": "Ji Yang",
+    "org": "Emory"
+   },
+   {
+    "name": "Leo Li",
+    "org": "UTHealth"
+   }
+  ]
+ },
+ "past": {
+  "eyebrow": "Last year \u00b7 Atlanta 2025",
+  "heading": "246 attendees across two forums",
+  "intro": "The 2025 forum ran alongside AMIA in Atlanta and filled the Atlanta Ballroom at the Courtland Grand Hotel. Here is who spoke.",
+  "cols": [
+   {
+    "label": "Invited speakers",
+    "items": [
+     {
+      "name": "Zhongming Zhao",
+      "org": "UTHealth"
+     },
+     {
+      "name": "Mei Liu",
+      "org": "University of Florida"
+     },
+     {
+      "name": "Carl Yang",
+      "org": "Emory"
+     },
+     {
+      "name": "Yan-Ran (Joyce) Wang",
+      "org": "University of Miami"
+     }
+    ]
+   },
+   {
+    "label": "Panel \u00b7 AI leadership in medical school",
+    "items": [
+     {
+      "name": "Jiang Bian",
+      "org": "Indiana University"
+     },
+     {
+      "name": "Fei Wang",
+      "org": "Cornell"
+     },
+     {
+      "name": "Rui Zhang",
+      "org": "University of Minnesota"
+     },
+     {
+      "name": "Cui Tao",
+      "org": "Mayo Clinic"
+     }
+    ]
+   },
+   {
+    "label": "Panel \u00b7 Career development for trainees",
+    "items": [
+     {
+      "name": "Di Hu",
+      "org": "UC Irvine"
+     },
+     {
+      "name": "Xinsong Du",
+      "org": "Harvard"
+     },
+     {
+      "name": "Zixia Zhou",
+      "org": "Stanford"
+     },
+     {
+      "name": "Rui Yin",
+      "org": "University of Florida"
+     },
+     {
+      "name": "Xiaoyang Wang",
+      "org": "IMO"
+     }
+    ]
+   }
+  ]
+ },
+ "venue": {
+  "eyebrow": "Venue & logistics",
+  "heading": "Getting there",
+  "faq": [
+   {
+    "q": "Where is it?",
+    "a": "Oaks Ballroom, Sheraton Suites Market Center Dallas, 2101 N Stemmons Freeway, Dallas, TX 75207 \u2014 a few minutes up Stemmons from the Hilton Anatole, the AMIA 2026 host hotel."
+   },
+   {
+    "q": "Is parking available?",
+    "a": "Yes. Parking is complimentary for forum attendees."
+   },
+   {
+    "q": "What does registration include?",
+    "a": "The full program and one beverage. Refreshments at the reception are first come, first served from 6:10 PM."
+   },
+   {
+    "q": "Do I need an AMIA badge?",
+    "a": "No. The forum is independently organized and open to anyone who registers, whether or not you are attending the AMIA Annual Symposium."
+   },
+   {
+    "q": "Can I pitch an open role?",
+    "a": "Yes \u2014 email the organizers by October 24 with your lab or company and the roles you are hiring for. Slots are limited and assigned in order of request."
+   },
+   {
+    "q": "Who do I contact?",
+    "a": "Leo Li \u2014 write to the address below."
+   }
+  ]
+ },
+ "footer": {
+  "name": "International Forum on Biomedical Informatics, Data Science, and AI",
+  "blurb": "November 7, 2026 \u00b7 Dallas, Texas \u00b7 A satellite forum of the AMIA 2026 Annual Symposium, independently organized.",
+  "regText": "Registration on Eventbrite",
+  "sponsorText": "Sponsored by OneSource Cloud"
+ }
+}
+</script>
+
+<script id="app">
+(function () {
+  "use strict";
+
+  var STATE = JSON.parse(document.getElementById("state").textContent);
+  var EDITING = false;
+  var DIRTY = false;
+  var CAN_WRITE = false;
+  var artifactNS = null;
+
+  /* ---------------- helpers ---------------- */
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;")
+      .replace(/[\u0080-\uffff]/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; });
+  }
+  function get(path) {
+    return path.split(".").reduce(function (o, k) {
+      return o == null ? undefined : o[/^\d+$/.test(k) ? Number(k) : k];
+    }, STATE);
+  }
+  function set(path, val) {
+    var keys = path.split(".");
+    var last = keys.pop();
+    var obj = keys.reduce(function (o, k) { return o[/^\d+$/.test(k) ? Number(k) : k]; }, STATE);
+    obj[/^\d+$/.test(last) ? Number(last) : last] = val;
+  }
+  /* b(path) marks an element editable and bound to a state path. */
+  function b(path) { return ' data-bind="' + esc(path) + '"'; }
+  function tools(arrPath, i, opts) {
+    opts = opts || {};
+    var h = '<div class="tools" data-arr="' + esc(arrPath) + '" data-i="' + i + '">';
+    if (!opts.noMove) {
+      h += '<button type="button" data-act="up" title="Move up" aria-label="Move up">&#9650;</button>';
+      h += '<button type="button" data-act="down" title="Move down" aria-label="Move down">&#9660;</button>';
+    }
+    if (opts.star) h += '<button type="button" data-act="star" title="Toggle highlight" aria-label="Toggle highlight">&#9733;</button>';
+    h += '<button type="button" data-act="del" title="Delete" aria-label="Delete">&times;</button>';
+    return h + "</div>";
+  }
+  function addRow(arrPath, label) {
+    return '<div class="add-row"><button type="button" class="add-btn" data-add="' + esc(arrPath) + '">+ ' + esc(label) + "</button></div>";
+  }
+
+  /* ---------------- render ---------------- */
+  function render() {
+    var s = STATE, h = "";
+    var reg = esc(s.meta.regUrl);
+
+    /* header */
+    h += '<header class="top"><div class="wrap top-in">';
+    h += '<a class="mark" href="#top"><span' + b("meta.wordmark") + ">" + esc(s.meta.wordmark) + '</span> <span' + b("meta.wordmarkYear") + ">" + esc(s.meta.wordmarkYear) + "</span></a>";
+    h += '<nav class="top-nav">';
+    s.nav.forEach(function (n, i) {
+      h += '<a href="' + esc(n.href) + '"' + b("nav." + i + ".label") + ">" + esc(n.label) + "</a>";
+    });
+    h += "</nav>";
+    h += '<a class="btn btn-sm" href="' + reg + '">Register</a>';
+    h += "</div></header>";
+
+    /* hero */
+    h += '<main id="top"><section class="hero"><canvas id="trace" aria-hidden="true"></canvas><div class="wrap hero-in">';
+    h += '<p class="eyebrow"' + b("hero.eyebrow") + ">" + esc(s.hero.eyebrow) + "</p>";
+    h += "<h1><span" + b("hero.title") + ">" + esc(s.hero.title) + "</span> <em" + b("hero.titleAccent") + ">" + esc(s.hero.titleAccent) + "</em></h1>";
+    h += '<p class="hero-dek"' + b("hero.dek") + ">" + esc(s.hero.dek) + "</p>";
+    h += '<div class="hero-cta">';
+    h += '<a class="btn" href="' + reg + '"><span' + b("hero.ctaPrimary") + ">" + esc(s.hero.ctaPrimary) + "</span></a>";
+    h += '<a class="btn btn-ghost" href="#agenda"><span' + b("hero.ctaSecondary") + ">" + esc(s.hero.ctaSecondary) + "</span></a>";
+    h += '<span class="cta-note"' + b("hero.ctaNote") + ">" + esc(s.hero.ctaNote) + "</span>";
+    h += "</div></div>";
+
+    /* facts */
+    h += '<div class="facts">';
+    s.facts.forEach(function (f, i) {
+      h += '<div class="fact">';
+      h += '<p class="fact-l"' + b("facts." + i + ".label") + ">" + esc(f.label) + "</p>";
+      f.lines.forEach(function (ln, j) {
+        h += '<p class="fact-v' + (ln.b ? " b" : "") + '"' + b("facts." + i + ".lines." + j + ".t") + ">" + esc(ln.t) + "</p>";
+      });
+      h += "</div>";
+    });
+    h += "</div></section>";
+
+    /* program */
+    h += '<section class="sec" id="program"><div class="wrap">';
+    h += head(s.program, "program");
+    h += '<div class="grid-4">';
+    s.program.cards.forEach(function (c, i) {
+      h += '<article class="card">' + tools("program.cards", i);
+      h += '<p class="card-time"' + b("program.cards." + i + ".time") + ">" + esc(c.time) + "</p>";
+      h += "<h3" + b("program.cards." + i + ".title") + ">" + esc(c.title) + "</h3>";
+      h += '<p class="card-body"' + b("program.cards." + i + ".body") + ">" + esc(c.body) + "</p>";
+      h += '<p class="card-tag"' + b("program.cards." + i + ".tag") + ">" + esc(c.tag) + "</p>";
+      h += "</article>";
+    });
+    h += "</div>" + addRow("program.cards", "Add session") + "</div></section>";
+
+    /* agenda */
+    h += '<section class="sec sec-alt" id="agenda"><div class="wrap">';
+    h += head(s.agenda, "agenda");
+    h += '<div class="agenda">';
+    s.agenda.slots.forEach(function (sl, i) {
+      h += '<div class="slot' + (sl.key ? " slot-key" : "") + '">' + tools("agenda.slots", i, { star: true });
+      h += '<div class="slot-time"' + b("agenda.slots." + i + ".time") + ">" + esc(sl.time) + "</div>";
+      h += '<div class="slot-body">';
+      h += '<div class="slot-title"' + b("agenda.slots." + i + ".title") + ">" + esc(sl.title) + "</div>";
+      h += '<div class="slot-note"' + b("agenda.slots." + i + ".note") + ">" + esc(sl.note) + "</div>";
+      h += '<div class="slot-dur"' + b("agenda.slots." + i + ".dur") + ">" + esc(sl.dur) + "</div>";
+      h += "</div></div>";
+    });
+    h += "</div>" + addRow("agenda.slots", "Add agenda item") + "</div></section>";
+
+    /* register */
+    h += '<section class="sec" id="register"><div class="wrap">';
+    h += head(s.register, "register");
+    h += '<div class="tiers">';
+    s.register.tiers.forEach(function (t, i) {
+      var p = "register.tiers." + i;
+      h += '<div class="tier">' + tools("register.tiers", i);
+      h += '<div class="tier-name"' + b(p + ".name") + ">" + esc(t.name) + "</div>";
+      h += '<div class="tier-price-row"><span class="tier-price"' + b(p + ".price") + ">" + esc(t.price) + '</span><span class="tier-cur"' + b(p + ".cur") + ">" + esc(t.cur) + "</span></div>";
+      h += '<p class="tier-who"' + b(p + ".who") + ">" + esc(t.who) + "</p>";
+      h += "<ul>";
+      t.items.forEach(function (it, j) {
+        h += '<li><span class="li-row"><span' + b(p + ".items." + j) + ">" + esc(it) + "</span>" + tools(p + ".items", j, { noMove: true }) + "</span></li>";
+      });
+      h += "</ul>";
+      h += '<div class="add-row"><button type="button" class="add-btn" data-add="' + p + '.items">+ Add line</button></div>';
+      h += '<a class="btn" href="' + reg + '"><span' + b(p + ".cta") + ">" + esc(t.cta) + "</span></a>";
+      h += "</div>";
+    });
+    h += "</div>" + addRow("register.tiers", "Add ticket tier");
+    h += '<p class="fineprint"' + b("register.fineprint") + ">" + esc(s.register.fineprint) + "</p>";
+    h += "</div></section>";
+
+    /* sponsor */
+    h += '<section class="sec sec-alt" id="sponsor"><div class="wrap">';
+    h += '<div class="sec-head"><p class="eyebrow"' + b("sponsor.eyebrow") + ">" + esc(s.sponsor.eyebrow) + "</p><h2" + b("sponsor.heading") + ">" + esc(s.sponsor.heading) + "</h2></div>";
+    s.sponsor.list.forEach(function (sp, i) {
+      var p = "sponsor.list." + i;
+      h += '<div class="sponsor">' + tools("sponsor.list", i);
+      h += "<div>";
+      h += '<span class="sponsor-badge"' + b(p + ".badge") + ">" + esc(sp.badge) + "</span>";
+      h += '<p class="sponsor-name"><a href="' + esc(sp.url) + '" target="_blank" rel="noopener"' + b(p + ".name") + ">" + esc(sp.name) + "</a></p>";
+      h += '<div class="sponsor-stats">';
+      sp.stats.forEach(function (st, j) {
+        h += '<div class="stat"><b' + b(p + ".stats." + j + ".v") + ">" + esc(st.v) + "</b><span" + b(p + ".stats." + j + ".l") + ">" + esc(st.l) + "</span></div>";
+      });
+      h += "</div></div>";
+      h += "<div>";
+      h += '<p class="sponsor-quote"' + b(p + ".quote") + ">" + esc(sp.quote) + "</p>";
+      h += '<p class="fineprint" style="margin-top:16px"><span' + b(p + ".blurb") + ">" + esc(sp.blurb) + '</span> <a href="' + esc(sp.url) + '" target="_blank" rel="noopener"' + b(p + ".linkText") + ">" + esc(sp.linkText) + "</a></p>";
+      h += "</div></div>";
+    });
+    h += addRow("sponsor.list", "Add sponsor");
+
+    h += '<div class="sec-head" style="margin-top:64px; margin-bottom:0">';
+    h += '<p class="eyebrow"' + b("sponsor.tiersEyebrow") + ">" + esc(s.sponsor.tiersEyebrow) + "</p>";
+    h += '<h2 style="font-size:26px"' + b("sponsor.tiersHeading") + ">" + esc(s.sponsor.tiersHeading) + "</h2>";
+    h += "<p><span" + b("sponsor.tiersIntro") + ">" + esc(s.sponsor.tiersIntro) + '</span> <a href="mailto:' + esc(s.meta.email) + '">' + esc(s.meta.email) + "</a>.</p></div>";
+    h += '<div class="table-scroll"><table><thead><tr><th>Tier</th><th>Fee</th><th>Included benefits</th><th>Registrations</th><th></th></tr></thead><tbody>';
+    s.sponsor.rows.forEach(function (r, i) {
+      var p = "sponsor.rows." + i;
+      h += "<tr" + (r.taken ? ' class="is-taken"' : "") + ">";
+      h += "<td><span" + b(p + ".tier") + ">" + esc(r.tier) + "</span>" + (r.taken ? '<span class="taken-pill">Taken</span>' : "") + "</td>";
+      h += '<td class="num"' + b(p + ".fee") + ">" + esc(r.fee) + "</td>";
+      h += "<td" + b(p + ".benefits") + ">" + esc(r.benefits) + "</td>";
+      h += '<td class="num"' + b(p + ".regs") + ">" + esc(r.regs) + "</td>";
+      h += '<td style="position:relative;width:1px">' + tools("sponsor.rows", i, { star: true }) + "</td>";
+      h += "</tr>";
+    });
+    h += "</tbody></table></div>" + addRow("sponsor.rows", "Add sponsorship tier");
+    h += "</div></section>";
+
+    /* committee */
+    h += '<section class="sec" id="committee"><div class="wrap">';
+    h += '<div class="sec-head"><p class="eyebrow"' + b("committee.eyebrow") + ">" + esc(s.committee.eyebrow) + "</p><h2" + b("committee.heading") + ">" + esc(s.committee.heading) + "</h2></div>";
+    h += '<div class="people">';
+    s.committee.people.forEach(function (p2, i) {
+      h += '<div class="person">' + tools("committee.people", i);
+      h += "<b" + b("committee.people." + i + ".name") + ">" + esc(p2.name) + "</b>";
+      h += "<span" + b("committee.people." + i + ".org") + ">" + esc(p2.org) + "</span></div>";
+    });
+    h += "</div>" + addRow("committee.people", "Add member") + "</div></section>";
+
+    /* past */
+    h += '<section class="sec sec-alt" id="past"><div class="wrap">';
+    h += head(s.past, "past");
+    h += '<div class="past">';
+    s.past.cols.forEach(function (c, i) {
+      h += '<div class="past-col">' + tools("past.cols", i);
+      h += '<p class="eyebrow"' + b("past.cols." + i + ".label") + ">" + esc(c.label) + "</p><ul>";
+      c.items.forEach(function (it, j) {
+        var p = "past.cols." + i + ".items." + j;
+        h += '<li><span class="li-row"><span><span' + b(p + ".name") + ">" + esc(it.name) + "</span> <i>&mdash; <span" + b(p + ".org") + ">" + esc(it.org) + "</span></i></span>" + tools("past.cols." + i + ".items", j, { noMove: true }) + "</span></li>";
+      });
+      h += "</ul>";
+      h += '<div class="add-row"><button type="button" class="add-btn" data-add="past.cols.' + i + '.items">+ Add person</button></div>';
+      h += "</div>";
+    });
+    h += "</div>" + addRow("past.cols", "Add column") + "</div></section>";
+
+    /* venue */
+    h += '<section class="sec" id="venue"><div class="wrap">';
+    h += '<div class="sec-head"><p class="eyebrow"' + b("venue.eyebrow") + ">" + esc(s.venue.eyebrow) + "</p><h2" + b("venue.heading") + ">" + esc(s.venue.heading) + "</h2></div>";
+    h += '<div class="faq">';
+    s.venue.faq.forEach(function (f, i) {
+      h += '<div class="faq-item">' + tools("venue.faq", i);
+      h += "<h3" + b("venue.faq." + i + ".q") + ">" + esc(f.q) + "</h3>";
+      h += "<p" + b("venue.faq." + i + ".a") + ">" + esc(f.a) + "</p></div>";
+    });
+    h += "</div>" + addRow("venue.faq", "Add question") + "</div></section>";
+
+    /* footer */
+    h += '<footer class="sec foot"><div class="wrap foot-in">';
+    h += '<div><div class="foot-mark"' + b("footer.name") + ">" + esc(s.footer.name) + "</div>";
+    h += "<p" + b("footer.blurb") + ">" + esc(s.footer.blurb) + "</p></div>";
+    h += '<div><p><a href="mailto:' + esc(s.meta.email) + '">' + esc(s.meta.email) + "</a><br>";
+    h += '<a href="' + reg + '"><span' + b("footer.regText") + ">" + esc(s.footer.regText) + "</span></a><br>";
+    h += '<a href="' + esc(s.sponsor.list.length ? s.sponsor.list[0].url : "#") + '" target="_blank" rel="noopener"><span' + b("footer.sponsorText") + ">" + esc(s.footer.sponsorText) + "</span></a></p></div>";
+    h += "</div></footer></main>";
+
+    /* settings panel (edit mode only) */
+    h = settingsHTML() + h;
+    return h;
+  }
+
+  function head(sec, key) {
+    return '<div class="sec-head"><p class="eyebrow"' + b(key + ".eyebrow") + ">" + esc(sec.eyebrow) + "</p>" +
+      "<h2" + b(key + ".heading") + ">" + esc(sec.heading) + "</h2>" +
+      "<p" + b(key + ".intro") + ">" + esc(sec.intro) + "</p></div>";
+  }
+
+  function settingsHTML() {
+    return '<div class="wrap" style="padding-top:20px"><div id="settings">' +
+      '<div class="f"><label for="f-reg">Registration link</label><input id="f-reg" type="url" data-field="meta.regUrl" value="' + esc(STATE.meta.regUrl) + '"></div>' +
+      '<div class="f"><label for="f-mail">Contact email</label><input id="f-mail" type="email" data-field="meta.email" value="' + esc(STATE.meta.email) + '"></div>' +
+      '<div class="f"><label for="f-title">Browser tab title</label><input id="f-title" type="text" data-field="meta.title" value="' + esc(STATE.meta.title) + '"></div>' +
+      "</div></div>";
+  }
+
+  /* ---------------- paint ---------------- */
+  function paint() {
+    document.getElementById("root").innerHTML = render();
+    initTrace();
+    if (EDITING) applyEditable(true);
+  }
+
+  function applyEditable(on) {
+    document.body.classList.toggle("editing", on);
+    var nodes = document.querySelectorAll("#root [data-bind]");
+    for (var i = 0; i < nodes.length; i++) {
+      if (on) {
+        nodes[i].setAttribute("contenteditable", "true");
+        nodes[i].setAttribute("spellcheck", "true");
+      } else {
+        nodes[i].removeAttribute("contenteditable");
+      }
+    }
+    var t = document.getElementById("b-toggle");
+    var sv = document.getElementById("b-save");
+    var cx = document.getElementById("b-cancel");
+    t.textContent = on ? "Preview" : "Edit page";
+    sv.hidden = !on;
+    cx.hidden = !on;
+    status(on ? "Click any text to edit" : (DIRTY ? "Unsaved changes" : "Editable"));
+  }
+
+  function status(msg) { document.getElementById("bar-status").textContent = msg; }
+
+  var toastTimer;
+  function toast(msg) {
+    var el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 3200);
+  }
+
+  /* ---------------- editing events ---------------- */
+  document.addEventListener("input", function (e) {
+    var el = e.target;
+    if (el.hasAttribute && el.hasAttribute("data-bind")) {
+      set(el.getAttribute("data-bind"), el.textContent);
+      markDirty();
+    } else if (el.hasAttribute && el.hasAttribute("data-field")) {
+      set(el.getAttribute("data-field"), el.value);
+      markDirty();
+    }
+  });
+
+  /* keep pasted content plain */
+  document.addEventListener("paste", function (e) {
+    var el = e.target;
+    if (!el.hasAttribute || !el.hasAttribute("data-bind")) return;
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData("text/plain");
+    document.execCommand("insertText", false, text.replace(/\s*\n\s*/g, " "));
+  });
+
+  /* Enter should not create markup inside a bound field */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.hasAttribute && e.target.hasAttribute("data-bind")) {
+      e.preventDefault();
+      e.target.blur();
+    }
+  });
+
+  function markDirty() {
+    if (!DIRTY) { DIRTY = true; }
+    status("Unsaved changes");
+  }
+
+  function blank(sample) {
+    if (sample === null || sample === undefined) return "";
+    if (typeof sample === "string") return "";
+    if (typeof sample === "boolean") return false;
+    if (Array.isArray(sample)) return sample.length ? [blank(sample[0])] : [];
+    var o = {};
+    Object.keys(sample).forEach(function (k) { o[k] = blank(sample[k]); });
+    return o;
+  }
+
+  document.addEventListener("click", function (e) {
+    var addBtn = e.target.closest ? e.target.closest("[data-add]") : null;
+    if (addBtn) {
+      e.preventDefault();
+      var arr = get(addBtn.getAttribute("data-add"));
+      if (!Array.isArray(arr)) return;
+      arr.push(arr.length ? blank(arr[arr.length - 1]) : "");
+      markDirty(); paint();
+      return;
+    }
+    var btn = e.target.closest ? e.target.closest(".tools button") : null;
+    if (!btn) return;
+    e.preventDefault();
+    var box = btn.parentNode;
+    var arr = get(box.getAttribute("data-arr"));
+    var i = Number(box.getAttribute("data-i"));
+    var act = btn.getAttribute("data-act");
+    if (!Array.isArray(arr)) return;
+    if (act === "del") {
+      if (arr.length <= 1 || window.confirm("Delete this item?")) arr.splice(i, 1);
+    } else if (act === "up" && i > 0) {
+      arr.splice(i - 1, 0, arr.splice(i, 1)[0]);
+    } else if (act === "down" && i < arr.length - 1) {
+      arr.splice(i + 1, 0, arr.splice(i, 1)[0]);
+    } else if (act === "star") {
+      var it = arr[i];
+      if ("key" in it) it.key = !it.key;
+      else if ("taken" in it) it.taken = !it.taken;
+    }
+    markDirty(); paint();
+  });
+
+  /* ---------------- publish ---------------- */
+  function fullDoc() {
+    var css = document.getElementById("css").textContent;
+    var app = document.getElementById("app").textContent;
+    var close = "<" + "/script>";
+    return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+      "<title>" + esc(STATE.meta.title) + "</title>\n" +
+      '<style id="css">' + css + "</style>\n</head>\n<body>\n" +
+      '<div id="root">' + render() + "</div>\n" +
+      '<div id="bar" role="toolbar" aria-label="Page editing">' +
+        '<span class="pill" id="bar-status">Editable</span>' +
+        '<button class="b-edit" id="b-toggle" type="button">Edit page</button>' +
+        '<button class="b-save" id="b-save" type="button" hidden>Save &amp; publish</button>' +
+        '<button class="b-plain" id="b-cancel" type="button" hidden>Discard</button>' +
+      "</div>\n" +
+      '<div id="toast" role="status" aria-live="polite"></div>\n' +
+      '<script type="application/json" id="state">\n' +
+      JSON.stringify(STATE, null, 1).replace(/[\u007f-\uffff<]/g, function (c) {
+        return "\\u" + ("000" + c.charCodeAt(0).toString(16)).slice(-4);
+      }) + "\n" + close + "\n" +
+      '<script id="app">' + app + close + "\n</body>\n</html>";
+  }
+
+  async function save() {
+    var sv = document.getElementById("b-save");
+    sv.disabled = true;
+    status("Publishing\u2026");
+    try {
+      var res = await artifactNS.publish(fullDoc());
+      DIRTY = false;
+      toast("Published. Everyone with the link sees this version.");
+      status("Saved");
+    } catch (err) {
+      var code = err && err.code ? err.code : "upstream_error";
+      if (code === "conflict") {
+        toast("Someone else published first \u2014 reloading to their version.");
+      } else if (code === "not_writer" || code === "not_granted" || code === "not_declared" || code === "capability_disabled") {
+        CAN_WRITE = false;
+        document.body.classList.remove("can-edit");
+        toast("This view is read-only, so changes can't be saved.");
+      } else if (code === "too_large") {
+        toast("The page is too large to publish. Remove some content and try again.");
+      } else if (code === "rate_limited") {
+        toast("Publishing too often. Wait a moment, then save again.");
+      } else {
+        toast("Couldn't publish. Your edits are still here \u2014 try saving again.");
+      }
+      status(DIRTY ? "Unsaved changes" : "Editable");
+    } finally {
+      sv.disabled = false;
+    }
+  }
+
+  /* ---------------- hero trace ---------------- */
+  function initTrace() {
+    var canvas = document.getElementById("trace");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t = 0, raf;
+
+    function color() {
+      return getComputedStyle(document.documentElement).getPropertyValue("--trace").trim() || "12, 90, 82";
+    }
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      w = r.width; h = r.height;
+      canvas.width = Math.max(1, Math.floor(w * dpr));
+      canvas.height = Math.max(1, Math.floor(h * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function amp(x, phase) {
+      var p = (x * 0.006 + phase) % (Math.PI * 2);
+      var spike = Math.exp(-Math.pow((p - 2.2) * 3.4, 2)) - Math.exp(-Math.pow((p - 2.62) * 5.0, 2)) * 0.45;
+      var drift = Math.sin(x * 0.0016 + phase * 0.7) * 0.30 + Math.sin(x * 0.0041 - phase * 0.4) * 0.16;
+      return spike * 0.8 + drift;
+    }
+    function line(phase, yBase, scale, alpha) {
+      ctx.beginPath();
+      for (var x = 0; x <= w; x += 3) {
+        var y = yBase - amp(x, phase) * scale;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = "rgba(" + color() + "," + alpha + ")";
+      ctx.lineWidth = 1.25;
+      ctx.stroke();
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      line(t, h * 0.72, h * 0.20, 0.13);
+      line(t * 0.62 + 2.0, h * 0.50, h * 0.15, 0.075);
+      line(t * 0.41 + 4.3, h * 0.30, h * 0.11, 0.05);
+    }
+    function frame() { t += 0.0055; draw(); raf = requestAnimationFrame(frame); }
+
+    if (initTrace._raf) cancelAnimationFrame(initTrace._raf);
+    if (initTrace._onResize) window.removeEventListener("resize", initTrace._onResize);
+    initTrace._onResize = function () { resize(); draw(); };
+    resize(); draw();
+    window.addEventListener("resize", initTrace._onResize);
+    if (!reduce) { raf = requestAnimationFrame(frame); initTrace._raf = raf; }
+  }
+
+  /* ---------------- boot ---------------- */
+  paint();
+
+  document.getElementById("b-toggle").addEventListener("click", function () {
+    EDITING = !EDITING;
+    applyEditable(EDITING);
+    if (EDITING) window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  document.getElementById("b-save").addEventListener("click", save);
+  document.getElementById("b-cancel").addEventListener("click", function () {
+    if (!DIRTY || window.confirm("Discard unsaved changes and reload the published version?")) location.reload();
+  });
+
+  window.addEventListener("beforeunload", function (e) {
+    if (DIRTY) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  (async function () {
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    artifactNS = await window.claude.use("artifact");
+    if (!artifactNS || typeof artifactNS.publish !== "function") return;
+    CAN_WRITE = true;
+    document.body.classList.add("can-edit");
+  })();
+})();
+</script>
