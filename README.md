@@ -19,6 +19,17 @@ The page renders itself from that JSON on load. To change the agenda,
 prices, speakers, or sponsors, edit that block — you do not need to touch
 the markup or CSS.
 
+## Registration and payment
+
+Registration is handled by Stripe Payment Links against the DeepKin Stripe
+account - one link per rate. The site never touches card data; each button is
+a plain link out to Stripe's hosted checkout, which is why this works on a
+static host with no backend and no API keys in the page.
+
+The two link URLs live in the `state` JSON under `register.tiers[].payUrl`.
+Until a URL is set, that tier's button renders as an inert "Registration opens
+soon" placeholder rather than a broken link. Only `https://` URLs are accepted.
+
 ## Updating
 
 Edit `index.html`, commit, and push. GitHub Pages redeploys in about a minute.

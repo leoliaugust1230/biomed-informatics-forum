@@ -127,6 +127,11 @@
   @media (max-width:700px) { .tiers { grid-template-columns:1fr; } }
 
   .fineprint { margin-top:22px; font-size:14px; color:var(--muted); max-width:66ch; }
+  .btn-disabled { background:transparent; color:var(--muted); border-color:var(--line-strong); cursor:default; }
+  .btn-disabled:hover { background:transparent; border-color:var(--line-strong); }
+  .pay-note { font-size:13.5px; color:var(--muted); margin-top:-4px; }
+  .pay-todo { display:none; font-family:var(--font-mono); font-size:11px; color:var(--edit); line-height:1.5; }
+  body.editing .pay-todo { display:block; }
 
   .sponsor { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:40px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:40px; box-shadow:var(--shadow); position:relative; }
   .sec-alt .sponsor { background:var(--bg); }
@@ -260,7 +265,6 @@
 {
  "meta": {
   "title": "Biomedical Informatics Forum 2026",
-  "regUrl": "https://www.eventbrite.com/o/international-forum-on-biomedical-informatics-108687647861",
   "email": "leoliaugust1230@gmail.com",
   "wordmark": "IFBDSAI",
   "wordmarkYear": "/ 2026"
@@ -460,7 +464,8 @@
      "One beverage included",
      "Eligible to pitch during the hiring session"
     ],
-    "cta": "Register at $20"
+    "cta": "Register - $20",
+    "payUrl": ""
    },
    {
     "name": "Faculty & Industry",
@@ -473,10 +478,13 @@
      "One beverage included",
      "Eligible to pitch during the hiring session"
     ],
-    "cta": "Register at $200"
+    "cta": "Register - $200",
+    "payUrl": ""
    }
   ],
-  "fineprint": "Refreshments at the reception are served first come, first served. On-site registration is available at the door while seats remain, but the room caps at 150 and last year\u2019s forum filled \u2014 registering ahead is the safer bet. To pitch a role during the hiring session, email the organizers by October 24."
+  "fineprint": "Refreshments at the reception are served first come, first served. On-site registration is available at the door while seats remain, but the room caps at 150 and last year\u2019s forum filled \u2014 registering ahead is the safer bet. To pitch a role during the hiring session, email the organizers by October 24.",
+  "howItWorks": "Registration and payment are handled securely by Stripe. Choose your rate, pay by card or digital wallet on Stripe's checkout page, and your emailed Stripe receipt is your confirmation - bring it to check-in. We never see or store your card details.",
+  "refund": "Refunds: full refund on request until October 24, 2026. After that, registration is non-refundable but may be transferred to a colleague - email the organizers with the replacement attendee's name."
  },
  "sponsor": {
   "eyebrow": "Supported by",
@@ -649,6 +657,10 @@
     "a": "No. The forum is independently organized and open to anyone who registers, whether or not you are attending the AMIA Annual Symposium."
    },
    {
+    "q": "How do I pay, and what counts as confirmation?",
+    "a": "Payment is by card or digital wallet through Stripe. Stripe emails you a receipt as soon as the payment clears - that receipt is your registration confirmation. If you need an institutional invoice instead, email the organizers before you register."
+   },
+   {
     "q": "Can I pitch an open role?",
     "a": "Yes \u2014 email the organizers by October 24 with your lab or company and the roles you are hiring for. Slots are limited and assigned in order of request."
    },
@@ -661,7 +673,7 @@
  "footer": {
   "name": "International Forum on Biomedical Informatics, Data Science, and AI",
   "blurb": "November 7, 2026 \u00b7 Dallas, Texas \u00b7 A satellite forum of the AMIA 2026 Annual Symposium, independently organized.",
-  "regText": "Registration on Eventbrite",
+  "regText": "Register for the forum",
   "sponsorText": "Sponsored by OneSource Cloud"
  }
 }
@@ -715,7 +727,6 @@
   /* ---------------- render ---------------- */
   function render() {
     var s = STATE, h = "";
-    var reg = esc(s.meta.regUrl);
 
     /* header */
     h += '<header class="top"><div class="wrap top-in">';
@@ -725,7 +736,7 @@
       h += '<a href="' + esc(n.href) + '"' + b("nav." + i + ".label") + ">" + esc(n.label) + "</a>";
     });
     h += "</nav>";
-    h += '<a class="btn btn-sm" href="' + reg + '">Register</a>';
+    h += '<a class="btn btn-sm" href="#register">Register</a>';
     h += "</div></header>";
 
     /* hero */
@@ -734,7 +745,7 @@
     h += "<h1><span" + b("hero.title") + ">" + esc(s.hero.title) + "</span> <em" + b("hero.titleAccent") + ">" + esc(s.hero.titleAccent) + "</em></h1>";
     h += '<p class="hero-dek"' + b("hero.dek") + ">" + esc(s.hero.dek) + "</p>";
     h += '<div class="hero-cta">';
-    h += '<a class="btn" href="' + reg + '"><span' + b("hero.ctaPrimary") + ">" + esc(s.hero.ctaPrimary) + "</span></a>";
+    h += '<a class="btn" href="#register"><span' + b("hero.ctaPrimary") + ">" + esc(s.hero.ctaPrimary) + "</span></a>";
     h += '<a class="btn btn-ghost" href="#agenda"><span' + b("hero.ctaSecondary") + ">" + esc(s.hero.ctaSecondary) + "</span></a>";
     h += '<span class="cta-note"' + b("hero.ctaNote") + ">" + esc(s.hero.ctaNote) + "</span>";
     h += "</div></div>";
@@ -796,11 +807,20 @@
       });
       h += "</ul>";
       h += '<div class="add-row"><button type="button" class="add-btn" data-add="' + p + '.items">+ Add line</button></div>';
-      h += '<a class="btn" href="' + reg + '"><span' + b(p + ".cta") + ">" + esc(t.cta) + "</span></a>";
+      var pay = /^https:\/\/[^"'\s]+$/i.test(t.payUrl || "") ? esc(t.payUrl) : "";
+      if (pay) {
+        h += '<a class="btn" href="' + pay + '"><span' + b(p + ".cta") + ">" + esc(t.cta) + "</span></a>";
+      } else {
+        h += '<span class="btn btn-disabled" role="link" aria-disabled="true"><span' + b(p + ".cta") + ">" + esc(t.cta) + "</span></span>";
+        h += '<p class="pay-note">Registration opens soon.</p>';
+        h += '<p class="pay-todo">No Stripe link yet &mdash; paste this tier\'s payment link in the settings panel at the top of the page.</p>';
+      }
       h += "</div>";
     });
     h += "</div>" + addRow("register.tiers", "Add ticket tier");
+    h += '<p class="fineprint"' + b("register.howItWorks") + ">" + esc(s.register.howItWorks) + "</p>";
     h += '<p class="fineprint"' + b("register.fineprint") + ">" + esc(s.register.fineprint) + "</p>";
+    h += '<p class="fineprint"' + b("register.refund") + ">" + esc(s.register.refund) + "</p>";
     h += "</div></section>";
 
     /* sponsor */
@@ -886,7 +906,7 @@
     h += '<div><div class="foot-mark"' + b("footer.name") + ">" + esc(s.footer.name) + "</div>";
     h += "<p" + b("footer.blurb") + ">" + esc(s.footer.blurb) + "</p></div>";
     h += '<div><p><a href="mailto:' + esc(s.meta.email) + '">' + esc(s.meta.email) + "</a><br>";
-    h += '<a href="' + reg + '"><span' + b("footer.regText") + ">" + esc(s.footer.regText) + "</span></a><br>";
+    h += '<a href="#register"><span' + b("footer.regText") + ">" + esc(s.footer.regText) + "</span></a><br>";
     h += '<a href="' + esc(s.sponsor.list.length ? s.sponsor.list[0].url : "#") + '" target="_blank" rel="noopener"><span' + b("footer.sponsorText") + ">" + esc(s.footer.sponsorText) + "</span></a></p></div>";
     h += "</div></footer></main>";
 
@@ -902,11 +922,14 @@
   }
 
   function settingsHTML() {
-    return '<div class="wrap" style="padding-top:20px"><div id="settings">' +
-      '<div class="f"><label for="f-reg">Registration link</label><input id="f-reg" type="url" data-field="meta.regUrl" value="' + esc(STATE.meta.regUrl) + '"></div>' +
-      '<div class="f"><label for="f-mail">Contact email</label><input id="f-mail" type="email" data-field="meta.email" value="' + esc(STATE.meta.email) + '"></div>' +
-      '<div class="f"><label for="f-title">Browser tab title</label><input id="f-title" type="text" data-field="meta.title" value="' + esc(STATE.meta.title) + '"></div>' +
-      "</div></div>";
+    var h = '<div class="wrap" style="padding-top:20px"><div id="settings">';
+    h += '<div class="f"><label for="f-mail">Contact email</label><input id="f-mail" type="email" data-field="meta.email" value="' + esc(STATE.meta.email) + '"></div>';
+    h += '<div class="f"><label for="f-title">Browser tab title</label><input id="f-title" type="text" data-field="meta.title" value="' + esc(STATE.meta.title) + '"></div>';
+    STATE.register.tiers.forEach(function (t, i) {
+      h += '<div class="f"><label for="f-pay' + i + '">Stripe link ' + esc(t.price) + '</label>' +
+        '<input id="f-pay' + i + '" type="url" placeholder="https://buy.stripe.com/..." data-field="register.tiers.' + i + '.payUrl" value="' + esc(t.payUrl || "") + '"></div>';
+    });
+    return h + "</div></div>";
   }
 
   /* ---------------- paint ---------------- */
@@ -956,6 +979,17 @@
     } else if (el.hasAttribute && el.hasAttribute("data-field")) {
       set(el.getAttribute("data-field"), el.value);
       markDirty();
+    }
+  });
+
+  /* settings inputs affect layout (a Stripe link turns its button live), so
+     repaint once the field is committed rather than on every keystroke */
+  document.addEventListener("change", function (e) {
+    var el = e.target;
+    if (el.hasAttribute && el.hasAttribute("data-field")) {
+      set(el.getAttribute("data-field"), el.value);
+      markDirty();
+      paint();
     }
   });
 
