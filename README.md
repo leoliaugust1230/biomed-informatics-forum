@@ -16,8 +16,14 @@ strict CSP that blocks external hosts:
   released under CC0 via Wikimedia Commons (~428 KB, JPEG).
 - Newsreader and Manrope webfonts, SIL Open Font License (~247 KB, woff2,
   latin subset only).
+- Seven photographs from the 2024 New Orleans and 2025 Atlanta forums, used
+  as the rolling banner in the past-events section (~445 KB, JPEG).
+- The OneSource Cloud wordmark, inlined as SVG rather than base64. The
+  supplied asset is white, so it sits on a dark chip - the shape it was drawn
+  for - instead of being recoloured, which the sponsorship agreement's brand
+  clause would not permit.
 
-That puts the file around 750 KB. It is one HTTP request and caches well.
+That puts the file around 1.3 MB. It is one HTTP request and caches well.
 
 ## Design
 
