@@ -335,7 +335,7 @@
   "ctaPrimary": "Register \u2014 $20 / $200",
   "ctaSecondary": "View the program",
   "ctaNote": "150 seats \u00b7 registration closes when the room fills",
-  "tagline": "Where the hallway conversation gets a stage."
+  "tagline": ""
  },
  "facts": [
   {
@@ -482,7 +482,7 @@
      "Eligible to pitch during the hiring session"
     ],
     "cta": "Register - $20",
-    "payUrl": ""
+    "payUrl": "https://buy.stripe.com/28E4gz1Ps52u2G28c6bsc02"
    },
    {
     "name": "Faculty & Industry",
@@ -496,7 +496,7 @@
      "Eligible to pitch during the hiring session"
     ],
     "cta": "Register - $200",
-    "payUrl": ""
+    "payUrl": "https://buy.stripe.com/00w3cvfGi2Um0xU1NIbsc03"
    }
   ],
   "fineprint": "Refreshments at the reception are served first come, first served. On-site registration is available at the door while seats remain, but the room caps at 150 and last year\u2019s forum filled \u2014 registering ahead is the safer bet. To pitch a role during the hiring session, email the organizers by October 24.",
@@ -786,7 +786,7 @@
     h += '<section class="hero"><div class="hero-img"></div><div class="hero-veil"></div><div class="wrap hero-in">';
     h += '<p class="eyebrow"' + b("hero.eyebrow") + ">" + esc(s.hero.eyebrow) + "</p>";
     h += '<h1><span class="l1"' + b("hero.title") + ">" + esc(s.hero.title) + '</span><span class="l2"' + b("hero.titleAccent") + ">" + esc(s.hero.titleAccent) + "</span></h1>";
-    h += '<p class="hero-tag"' + b("hero.tagline") + ">" + esc(s.hero.tagline) + "</p>";
+    if (s.hero.tagline || EDITING) h += '<p class="hero-tag"' + b("hero.tagline") + ">" + esc(s.hero.tagline) + "</p>";
     h += '<p class="hero-dek"' + b("hero.dek") + ">" + esc(s.hero.dek) + "</p>";
     h += '<p class="hero-note"' + b("hero.ctaNote") + ">" + esc(s.hero.ctaNote) + "</p>";
     h += '<div class="hero-pad"></div></div></section>';
@@ -843,8 +843,9 @@
       h += '<div class="slot' + (sl.key ? " slot-key" : "") + '">' + tools("agenda.slots", i, { star: true });
       h += '<div class="slot-time"' + b(p + ".time") + ">" + esc(sl.time) + '</div><div class="slot-body">';
       h += '<div class="slot-title"' + b(p + ".title") + ">" + esc(sl.title) + "</div>";
-      h += '<div class="slot-note"' + b(p + ".note") + ">" + esc(sl.note) + "</div>";
-      h += '<div class="slot-dur"' + b(p + ".dur") + ">" + esc(sl.dur) + "</div></div></div>";
+      if (sl.note || EDITING) h += '<div class="slot-note"' + b(p + ".note") + ">" + esc(sl.note) + "</div>";
+      if (sl.dur || EDITING) h += '<div class="slot-dur"' + b(p + ".dur") + ">" + esc(sl.dur) + "</div>";
+      h += "</div></div>";
     });
     h += "</div>" + addRow("agenda.slots", "Add agenda item") + "</div></section>";
 
@@ -1104,7 +1105,9 @@
   paint();
 
   document.getElementById("b-toggle").addEventListener("click", function () {
-    EDITING = !EDITING; applyEditable(EDITING);
+    EDITING = !EDITING;
+    paint();                 /* re-render: edit-only fields appear/disappear */
+    applyEditable(EDITING);
     if (EDITING) window.scrollTo({ top: 0, behavior: "smooth" });
   });
   document.getElementById("b-save").addEventListener("click", save);
