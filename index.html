@@ -109,11 +109,6 @@
   .sec-head h2 { font-size:clamp(28px,3.9vw,42px); margin:14px 0 0; }
   .sec-head p { margin-top:16px; color:var(--ink-2); font-size:17.5px; }
 
-  /* stats */
-  .stats { display:flex; flex-wrap:wrap; gap:52px; margin-top:44px; padding-top:34px; border-top:1px solid var(--line-2); }
-  .stat b { display:block; font-family:var(--serif); font-size:46px; font-weight:400; color:var(--accent); line-height:1; font-variant-numeric:tabular-nums; }
-  .stat span { display:block; margin-top:8px; font-weight:700; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
-
   /* numbered cards */
   .num-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
   .ncard { background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:32px 30px 34px;
@@ -422,13 +417,6 @@
     "key": true
    },
    {
-    "time": "",
-    "title": "Break",
-    "note": "Complimentary water station",
-    "dur": "",
-    "key": false
-   },
-   {
     "time": "4:35 PM",
     "title": "Panel \u2014 Grant Trends & the funding landscape",
     "note": "Speakers to be announced",
@@ -689,31 +677,7 @@
   "Foundation models",
   "EHR data science",
   "Career development"
- ],
- "why": {
-  "eyebrow": "Why this forum",
-  "heading": "The conversations that don\u2019t fit in a session slot",
-  "body1": "AMIA fills five days with peer-reviewed science. What it leaves less room for is the practical career knowledge that circulates informally \u2014 who is hiring, what editors actually reject, where the funding is moving, and whether to jump to industry.",
-  "body2": "This forum puts those four questions on a stage with the people who answer them, then hands the room a drink and ninety minutes to keep talking.",
-  "stats": [
-   {
-    "n": "4",
-    "l": "Working sessions"
-   },
-   {
-    "n": "150",
-    "l": "Seats"
-   },
-   {
-    "n": "246",
-    "l": "Attendees since 2025"
-   },
-   {
-    "n": "1",
-    "l": "Afternoon"
-   }
-  ]
- }
+ ]
 }
 </script>
 
@@ -810,20 +774,8 @@
     }
     h += '<div class="strip" aria-hidden="true"><div class="strip-track">' + strip + "</div></div>";
 
-    /* why */
-    h += '<section class="sec"><div class="wrap">';
-    h += '<div class="sec-head"><p class="eyebrow eyebrow-a"' + b("why.eyebrow") + ">" + esc(s.why.eyebrow) + "</p>";
-    h += "<h2" + b("why.heading") + ">" + esc(s.why.heading) + "</h2>";
-    h += "<p" + b("why.body1") + ">" + esc(s.why.body1) + "</p>";
-    h += '<p style="margin-top:16px;color:var(--ink-2);font-size:17.5px"' + b("why.body2") + ">" + esc(s.why.body2) + "</p></div>";
-    h += '<div class="stats">';
-    s.why.stats.forEach(function (st, i) {
-      h += '<div class="stat"><b' + b("why.stats." + i + ".n") + ">" + esc(st.n) + "</b><span" + b("why.stats." + i + ".l") + ">" + esc(st.l) + "</span></div>";
-    });
-    h += "</div></div></section>";
-
     /* program */
-    h += '<section class="sec sec-mist sec-line" id="program"><div class="wrap">';
+    h += '<section class="sec sec-mist" id="program"><div class="wrap">';
     h += head(s.program, "program");
     h += '<div class="num-grid">';
     s.program.cards.forEach(function (c, i) {
