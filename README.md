@@ -7,7 +7,24 @@ Symposium.
 ## Files
 
 - `index.html` — the entire site. Self-contained: no build step, no
-  dependencies, no external assets. Open it in a browser and it works.
+  dependencies, no external requests. Open it in a browser and it works.
+
+Everything is embedded as data URIs, because the page must also run under a
+strict CSP that blocks external hosts:
+
+- Hero photograph of downtown Dallas from Reunion Tower, by IcedCowboyCoffee,
+  released under CC0 via Wikimedia Commons (~428 KB, JPEG).
+- Newsreader and Manrope webfonts, SIL Open Font License (~247 KB, woff2,
+  latin subset only).
+
+That puts the file around 750 KB. It is one HTTP request and caches well.
+
+## Design
+
+Light-only by design: the page commits to one warm, bright palette on every
+host theme rather than shipping a dark variant, so every colour is painted
+explicitly. All text/background pairs meet WCAG AA. Layout is verified free of
+horizontal overflow from 320px up.
 
 ## How the content is stored
 
