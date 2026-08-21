@@ -122,7 +122,7 @@
   .slot-time { font-weight:700; font-size:13.5px; font-variant-numeric:tabular-nums; color:var(--ink); padding-top:3px; }
   .slot-body { display:flex; flex-direction:column; gap:5px; }
   .slot-title { font-family:var(--serif); font-size:21px; }
-  .slot-note { font-size:15px; color:var(--muted); }
+  .slot-note { font-size:15px; color:var(--muted); white-space:pre-line; }
   .slot-dur { font-weight:700; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
   .slot-key { border-left:2.5px solid var(--accent); margin-left:-22px; padding-left:19.5px; }
   .slot-key .slot-title { color:var(--accent); }
@@ -142,7 +142,7 @@
   .tier li::before { content:""; position:absolute; left:0; top:11px; width:11px; height:1.5px; background:var(--accent); }
   .tier .btn, .tier .btn-off { margin-top:10px; align-self:flex-start; }
   @media (max-width:760px){ .tiers{grid-template-columns:1fr;} }
-  .fineprint { margin-top:24px; font-size:14.5px; color:var(--muted); max-width:68ch; }
+  .fineprint { margin-top:24px; font-size:14.5px; color:var(--muted); max-width:68ch; white-space:pre-line; }
   .pay-note { font-size:14px; color:var(--muted); }
   .pay-todo { display:none; font-size:12px; color:var(--edit); font-weight:700; }
   body.editing .pay-todo { display:block; }
@@ -298,7 +298,7 @@
   "email": "leoliaugust1230@gmail.com",
   "wordmark": "Intl. Forum on Biomedical Informatics",
   "lightningFormUrl": "https://forms.gle/6hQfWpK8qKLMzvpJ9",
-  "dinnerFormUrl": ""
+  "dinnerFormUrl": "https://forms.gle/7GyF1uDqVDU9rCtT7"
  },
  "nav": [
   {
@@ -412,7 +412,7 @@
    {
     "time": "5:15 PM",
     "title": "The Lightning Round",
-    "note": "Sponsor talk (5 min), Recruiting labs and companies (2 min)",
+    "note": "Sponsor talk (Lin Ma, OneSource Cloud CEO)\nRecruiting labs and companies (2 min each)",
     "dur": "30 min",
     "key": true
    },
@@ -471,7 +471,7 @@
   "fineprint": "Refreshments at the reception are served first come, first served. On-site registration is available at the door while seats remain, but the room caps at 150 and last year\u2019s forum filled \u2014 registering ahead is the safer bet. To pitch a role during the hiring session, email the organizers by October 24.",
   "howItWorks": "Registration and payment are handled securely by Stripe. Choose your rate, pay by card or digital wallet on Stripe's checkout page, and your emailed Stripe receipt is your confirmation - bring it to check-in. We never see or store your card details.",
   "refund": "Refunds: full refund on request until October 24, 2026. After that, registration is non-refundable but may be transferred to a colleague - email the organizers with the replacement attendee's name.",
-  "dinnerCallout": "Registered at the Faculty & Industry rate? The organizers' dinner needs a head count - RSVP through the form by October 24 so we can book the table."
+  "dinnerCallout": "Registered at the Faculty & Industry rate? The organizers' dinner needs a head count - RSVP through the form by October 10 so we can book the table."
  },
  "sponsor": {
   "eyebrow": "Supported by",
@@ -995,7 +995,27 @@
     document.execCommand("insertText", false, text.replace(/\s*\n\s*/g, " "));
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && e.target.hasAttribute && e.target.hasAttribute("data-bind")) { e.preventDefault(); e.target.blur(); }
+    if (e.key !== "Enter" || !e.target.hasAttribute || !e.target.hasAttribute("data-bind")) return;
+    e.preventDefault();
+    if (e.shiftKey) {
+      /* insert a real newline text node. execCommand("insertText","\n") gives a
+         <br>, which textContent drops - and textContent is this field's value,
+         so the break would vanish on save. white-space:pre-line renders it. */
+      var sel = window.getSelection();
+      if (sel && sel.rangeCount) {
+        var rg = sel.getRangeAt(0);
+        rg.deleteContents();
+        var tn = document.createTextNode("\n");
+        rg.insertNode(tn);
+        rg.setStartAfter(tn);
+        rg.setEndAfter(tn);
+        sel.removeAllRanges();
+        sel.addRange(rg);
+      }
+      e.target.dispatchEvent(new Event("input", { bubbles: true }));
+    } else {
+      e.target.blur();
+    }
   });
 
   function blank(sample) {
