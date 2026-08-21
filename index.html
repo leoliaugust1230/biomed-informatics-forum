@@ -111,17 +111,9 @@
   .sec-head h2 { font-size:clamp(28px,3.9vw,42px); margin:14px 0 0; }
   .sec-head p { margin-top:16px; color:var(--ink-2); font-size:17.5px; }
 
-  /* numbered cards */
-  .num-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-  .ncard { background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:32px 30px 34px;
-           display:flex; flex-direction:column; gap:12px; position:relative; }
-  .sec-mist .ncard, .sec-sand .ncard { background:var(--paper); }
-  .ncard-n { font-family:var(--serif); font-size:15px; color:var(--accent); font-variant-numeric:tabular-nums; letter-spacing:.04em; }
-  .ncard h3 { font-size:25px; }
-  .ncard-time { font-weight:700; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .ncard p.body { color:var(--ink-2); font-size:16px; }
-  .ncard-tag { margin-top:auto; padding-top:16px; font-weight:700; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
-  @media (max-width:800px){ .num-grid{grid-template-columns:1fr;} }
+  .callout { margin-top:30px; max-width:70ch; padding:22px 26px; background:var(--paper);
+             border:1px solid var(--line-2); border-left:3px solid var(--accent);
+             border-radius:var(--r); font-size:16px; color:var(--ink-2); }
 
   /* agenda */
   .agenda { border-top:1px solid var(--line-2); }
@@ -307,10 +299,6 @@
  },
  "nav": [
   {
-   "label": "Program",
-   "href": "#program"
-  },
-  {
    "label": "Agenda",
    "href": "#agenda"
   },
@@ -378,37 +366,6 @@
    ]
   }
  ],
- "program": {
-  "eyebrow": "This year\u2019s program",
-  "heading": "Four sessions",
-  "intro": "Every session this year is a working session: people who make the decisions, answering the questions in front of the room. Panelists are confirmed on a rolling basis and announced here as they are locked in.",
-  "cards": [
-   {
-    "time": "3:10 \u2013 3:55 PM",
-    "title": "Industry vs. Academia",
-    "body": "Two tracks compared honestly by people who have worked in both: the pace, the autonomy, the compensation, the kind of problems you get to own \u2014 and what it actually costs to cross over in either direction.",
-    "tag": "Panel discussion"
-   },
-   {
-    "time": "3:55 \u2013 4:35 PM",
-    "title": "Meet the Editors",
-    "body": "Invited editors from the field\u2019s leading journals on what gets desk-rejected and why, what separates a competitive submission from a merely correct one, and how review is adapting to AI-heavy manuscripts.",
-    "tag": "Invited journal editors"
-   },
-   {
-    "time": "4:45 \u2013 5:25 PM",
-    "title": "Grant Trends",
-    "body": "Where the funding is moving: shifting NIH priorities, AI-specific mechanisms, and how study sections are reading informatics proposals differently than they did three years ago.",
-    "tag": "Funding landscape"
-   },
-   {
-    "time": "5:25 \u2013 6:10 PM",
-    "title": "Hiring Pitches",
-    "body": "Labs, health systems, and companies with open roles get the floor for a short pitch \u2014 what they work on, who they need, how to apply. Bring your CV; the reception starts immediately after.",
-    "tag": "Lightning talks \u00b7 open roles"
-   }
-  ]
- },
  "agenda": {
   "eyebrow": "Saturday, November 7, 2026 \u00b7 all times CT",
   "heading": "Agenda",
@@ -417,7 +374,7 @@
    {
     "time": "2:45 PM",
     "title": "Check-in & registration",
-    "note": "Oaks Ballroom foyer. On-site payment accepted depends on avalibility.",
+    "note": "Oaks Ballroom foyer. On-site payment accepted depending on availability.",
     "dur": "",
     "key": false
    },
@@ -430,34 +387,34 @@
    },
    {
     "time": "3:35 PM",
-    "title": "Meet the Editors",
-    "note": "Invited journal editors \u00b7 to be announced",
-    "dur": "30 min \u00b7 INCL. AUDIENCE Q&A",
+    "title": "Innovative Research",
+    "note": "Invited speakers (2 people) \u00b7 to be announced",
+    "dur": "30 min \u00b7 incl. audience Q&A",
     "key": true
    },
    {
     "time": "4:05 PM",
-    "title": "Panel \u2014 Industry vs. Academia",
+    "title": "Novel Applications",
     "note": "Panelists to be announced",
     "dur": "30 min \u00b7 incl. audience Q&A",
     "key": true
    },
    {
     "time": "4:35 PM",
-    "title": "Panel \u2014 Grant Trends & the funding landscape",
+    "title": "Career Panel - Funding/career development",
     "note": "Speakers to be announced",
-    "dur": "40 min",
+    "dur": "30 min",
     "key": true
    },
    {
     "time": "5:15 PM",
-    "title": "Hiring pitches",
-    "note": "Recruiting labs and companies \u00b7 sign up by email to pitch",
-    "dur": "15 min",
+    "title": "Lightning talks",
+    "note": "Sponsor talk (5 min), Recruiting labs and companies (3 min) \u00b7 sign up by email to pitch",
+    "dur": "30 min",
     "key": true
    },
    {
-    "time": "5:30 PM",
+    "time": "5:45 PM",
     "title": "Networking reception",
     "note": "Beer, wine and refreshments \u00b7 hosted by OneSource Cloud",
     "dur": "until 7:30 PM",
@@ -493,7 +450,8 @@
      "Full program, all four sessions",
      "Networking reception",
      "One beverage included",
-     "Eligible to pitch during the hiring session"
+     "Eligible to pitch during the hiring session",
+     "Invitation to the organizers' dinner"
     ],
     "cta": "Register - $200",
     "payUrl": "https://buy.stripe.com/00w3cvfGi2Um0xU1NIbsc03"
@@ -540,18 +498,11 @@
     "org": "Yale"
    },
    {
-    "name": "xxx",
-    "org": "Mayo Clinic"
-   },
-   {
-    "name": "xxx",
-    "org": "Emory"
-   },
-   {
-    "name": "xxx",
-    "org": "UTHealth"
+    "name": "Leo Li",
+    "org": "Yale"
    }
-  ]
+  ],
+  "callout": "We are adding organizing committee members and volunteers for 2026. To put your name forward, write to us by August 30:"
  },
  "past": {
   "eyebrow": "Past forums \u00b7 New Orleans 2024 & Atlanta 2025",
@@ -678,7 +629,7 @@
    },
    {
     "q": "What does registration include?",
-    "a": "The full program and one beverage. Refreshments at the reception are first come, first served from 6:10 PM."
+    "a": "The full program and one beverage. Refreshments at the reception are first come, first served from 5:45 PM."
    },
    {
     "q": "Do I need an AMIA badge?",
@@ -819,23 +770,8 @@
     }
     h += '<div class="strip" aria-hidden="true"><div class="strip-track">' + strip + "</div></div>";
 
-    /* program */
-    h += '<section class="sec sec-mist" id="program"><div class="wrap">';
-    h += head(s.program, "program");
-    h += '<div class="num-grid">';
-    s.program.cards.forEach(function (c, i) {
-      var p = "program.cards." + i;
-      h += '<article class="ncard">' + tools("program.cards", i);
-      h += '<p class="ncard-n">' + n2(i) + "</p>";
-      h += '<p class="ncard-time"' + b(p + ".time") + ">" + esc(c.time) + "</p>";
-      h += "<h3" + b(p + ".title") + ">" + esc(c.title) + "</h3>";
-      h += '<p class="body"' + b(p + ".body") + ">" + esc(c.body) + "</p>";
-      h += '<p class="ncard-tag"' + b(p + ".tag") + ">" + esc(c.tag) + "</p></article>";
-    });
-    h += "</div>" + addRow("program.cards", "Add session") + "</div></section>";
-
     /* agenda */
-    h += '<section class="sec" id="agenda"><div class="wrap">';
+    h += '<section class="sec sec-mist" id="agenda"><div class="wrap">';
     h += head(s.agenda, "agenda");
     h += '<div class="agenda">';
     s.agenda.slots.forEach(function (sl, i) {
@@ -850,7 +786,7 @@
     h += "</div>" + addRow("agenda.slots", "Add agenda item") + "</div></section>";
 
     /* register */
-    h += '<section class="sec sec-mist sec-line" id="register"><div class="wrap">';
+    h += '<section class="sec sec-line" id="register"><div class="wrap">';
     h += head(s.register, "register");
     h += '<div class="tiers">';
     s.register.tiers.forEach(function (t, i) {
@@ -907,7 +843,9 @@
       h += "<b" + b("committee.people." + i + ".name") + ">" + esc(p2.name) + "</b>";
       h += "<span" + b("committee.people." + i + ".org") + ">" + esc(p2.org) + "</span></div>";
     });
-    h += "</div>" + addRow("committee.people", "Add member") + "</div></section>";
+    h += "</div>" + addRow("committee.people", "Add member");
+    h += '<p class="callout"><span' + b("committee.callout") + ">" + esc(s.committee.callout) + '</span> <a href="mailto:' + esc(s.meta.email) + '">' + esc(s.meta.email) + "</a></p>";
+    h += "</div></section>";
 
     /* last year */
     h += '<section class="sec sec-mist sec-line" id="past"><div class="wrap">';
