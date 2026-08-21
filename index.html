@@ -79,7 +79,7 @@
   .hero h1 .l2 { display:block; color:var(--ink); }
   .hero-tag { margin-top:26px; max-width:24ch; font-family:var(--serif); font-size:clamp(21px,2.5vw,27px);
               line-height:1.25; color:var(--accent); }
-  .hero-dek { margin-top:16px; max-width:52ch; font-size:18px; color:var(--ink-2); font-weight:500; }
+  .hero-dek { margin-top:16px; max-width:56ch; text-wrap:pretty; font-size:18px; color:var(--ink-2); font-weight:500; }
   .hero-note { margin-top:20px; font-size:14px; color:var(--ink-2); font-weight:500; }
   .hero-pad { height:clamp(120px,20vw,220px); }
 
@@ -107,10 +107,11 @@
   .sec-mist { background:var(--mist); }
   .sec-sand { background:var(--sand); }
   .sec-line { border-top:1px solid var(--line); }
-  .sec-head { max-width:60ch; margin-bottom:48px; }
+  .sec-head { max-width:68ch; margin-bottom:48px; }
   .sec-head h2 { font-size:clamp(28px,3.9vw,42px); margin:14px 0 0; }
-  .sec-head p { margin-top:16px; color:var(--ink-2); font-size:17.5px; }
+  .sec-head p { margin-top:16px; max-width:68ch; color:var(--ink-2); font-size:17.5px; text-wrap:pretty; }
 
+  .callout-cta { display:flex; flex-wrap:wrap; align-items:center; gap:16px; }
   .callout { margin-top:30px; max-width:70ch; padding:22px 26px; background:var(--paper);
              border:1px solid var(--line-2); border-left:3px solid var(--accent);
              border-radius:var(--r); font-size:16px; color:var(--ink-2); }
@@ -295,7 +296,8 @@
  "meta": {
   "title": "Biomedical Informatics Forum 2026",
   "email": "leoliaugust1230@gmail.com",
-  "wordmark": "Intl. Forum on Biomedical Informatics"
+  "wordmark": "Intl. Forum on Biomedical Informatics",
+  "lightningFormUrl": ""
  },
  "nav": [
   {
@@ -387,29 +389,29 @@
    },
    {
     "time": "3:35 PM",
-    "title": "Innovative Research",
+    "title": "Research Frontiers",
     "note": "Invited speakers (2 people) \u00b7 to be announced",
     "dur": "30 min \u00b7 incl. audience Q&A",
     "key": true
    },
    {
     "time": "4:05 PM",
-    "title": "Novel Applications",
+    "title": "Informatics in the Wild",
     "note": "Panelists to be announced",
     "dur": "30 min \u00b7 incl. audience Q&A",
     "key": true
    },
    {
     "time": "4:35 PM",
-    "title": "Career Panel - Funding/career development",
+    "title": "Funding & Careers",
     "note": "Speakers to be announced",
     "dur": "30 min",
     "key": true
    },
    {
     "time": "5:15 PM",
-    "title": "Lightning Talks",
-    "note": "Sponsor talk (5 min), Recruiting labs and companies (3 min) \u00b7 sign up by email to pitch",
+    "title": "The Lightning Round",
+    "note": "Sponsor talk (5 min), Recruiting labs and companies (3 min)",
     "dur": "30 min",
     "key": true
    },
@@ -427,7 +429,8 @@
     "dur": "",
     "key": false
    }
-  ]
+  ],
+  "pitchCallout": "Want a slot in the Lightning Round? Recruiting labs, companies and sponsors sign up through the form - two minutes, closes October 24."
  },
  "register": {
   "eyebrow": "Registration",
@@ -652,7 +655,7 @@
    },
    {
     "q": "Can I pitch an open role?",
-    "a": "Yes \u2014 email the organizers by October 24 with your lab or company and the roles you are hiring for. Slots are limited and assigned in order of request."
+    "a": "Yes - sign up through the Lightning Round form linked in the agenda. Slots are limited and assigned in order of request; sign-ups close October 24."
    }
   ]
  },
@@ -791,7 +794,16 @@
       if (sl.dur || EDITING) h += '<div class="slot-dur"' + b(p + ".dur") + ">" + esc(sl.dur) + "</div>";
       h += "</div></div>";
     });
-    h += "</div>" + addRow("agenda.slots", "Add agenda item") + "</div></section>";
+    h += "</div>" + addRow("agenda.slots", "Add agenda item");
+    var form = safeUrl(s.meta.lightningFormUrl);
+    h += '<div class="callout callout-cta"><span' + b("agenda.pitchCallout") + ">" + esc(s.agenda.pitchCallout) + "</span>";
+    if (form) {
+      h += '<a class="btn btn-sm" href="' + form + '" target="_blank" rel="noopener">Sign up to speak</a>';
+    } else {
+      h += '<span class="pay-note">Sign-up opens soon.</span>';
+      h += '<span class="pay-todo">No form yet &mdash; paste the Google Form link in the settings panel.</span>';
+    }
+    h += "</div></div></section>";
 
     /* register */
     h += '<section class="sec sec-line" id="register"><div class="wrap">';
@@ -916,6 +928,7 @@
     var h = '<div class="wrap" style="padding-top:20px;padding-bottom:8px"><div id="settings">';
     h += '<div class="f"><label for="f-mail">Contact email</label><input id="f-mail" type="email" data-field="meta.email" value="' + esc(STATE.meta.email) + '"></div>';
     h += '<div class="f"><label for="f-title">Browser tab title</label><input id="f-title" type="text" data-field="meta.title" value="' + esc(STATE.meta.title) + '"></div>';
+    h += '<div class="f"><label for="f-form">Lightning Round form</label><input id="f-form" type="url" placeholder="https://docs.google.com/forms/..." data-field="meta.lightningFormUrl" value="' + esc(STATE.meta.lightningFormUrl || "") + '"></div>';
     STATE.register.tiers.forEach(function (t, i) {
       h += '<div class="f"><label for="f-pay' + i + '">Stripe link ' + esc(t.price) + '</label>' +
         '<input id="f-pay' + i + '" type="url" placeholder="https://buy.stripe.com/..." data-field="register.tiers.' + i + '.payUrl" value="' + esc(t.payUrl || "") + '"></div>';

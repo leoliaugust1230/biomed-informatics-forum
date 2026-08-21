@@ -42,6 +42,14 @@ The page renders itself from that JSON on load. To change the agenda,
 prices, speakers, or sponsors, edit that block — you do not need to touch
 the markup or CSS.
 
+## Receipt email
+
+`receipt-function/` holds a Cloudflare Worker that emails a confirmation after
+each Stripe payment - date, room, address, door time. It is not part of the
+site and does not run on GitHub Pages; it deploys separately. See
+`receipt-function/README.md`. Stripe's own payment receipt is automatic and
+independent of it.
+
 ## Registration and payment
 
 Registration is handled by Stripe Payment Links against the DeepKin Stripe
