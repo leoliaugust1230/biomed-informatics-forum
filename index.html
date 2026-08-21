@@ -297,7 +297,8 @@
   "title": "Biomedical Informatics Forum 2026",
   "email": "leoliaugust1230@gmail.com",
   "wordmark": "Intl. Forum on Biomedical Informatics",
-  "lightningFormUrl": "https://forms.gle/6hQfWpK8qKLMzvpJ9"
+  "lightningFormUrl": "https://forms.gle/6hQfWpK8qKLMzvpJ9",
+  "dinnerFormUrl": ""
  },
  "nav": [
   {
@@ -469,7 +470,8 @@
   ],
   "fineprint": "Refreshments at the reception are served first come, first served. On-site registration is available at the door while seats remain, but the room caps at 150 and last year\u2019s forum filled \u2014 registering ahead is the safer bet. To pitch a role during the hiring session, email the organizers by October 24.",
   "howItWorks": "Registration and payment are handled securely by Stripe. Choose your rate, pay by card or digital wallet on Stripe's checkout page, and your emailed Stripe receipt is your confirmation - bring it to check-in. We never see or store your card details.",
-  "refund": "Refunds: full refund on request until October 24, 2026. After that, registration is non-refundable but may be transferred to a colleague - email the organizers with the replacement attendee's name."
+  "refund": "Refunds: full refund on request until October 24, 2026. After that, registration is non-refundable but may be transferred to a colleague - email the organizers with the replacement attendee's name.",
+  "dinnerCallout": "Registered at the Faculty & Industry rate? The organizers' dinner needs a head count - RSVP through the form by October 24 so we can book the table."
  },
  "sponsor": {
   "eyebrow": "Supported by",
@@ -833,7 +835,15 @@
     h += '<p class="fineprint"' + b("register.howItWorks") + ">" + esc(s.register.howItWorks) + "</p>";
     h += '<p class="fineprint"' + b("register.fineprint") + ">" + esc(s.register.fineprint) + "</p>";
     h += '<p class="fineprint"' + b("register.refund") + ">" + esc(s.register.refund) + "</p>";
-    h += "</div></section>";
+    var dinner = safeUrl(s.meta.dinnerFormUrl);
+    h += '<div class="callout callout-cta"><span' + b("register.dinnerCallout") + ">" + esc(s.register.dinnerCallout) + "</span>";
+    if (dinner) {
+      h += '<a class="btn btn-sm" href="' + dinner + '" target="_blank" rel="noopener">RSVP for the dinner</a>';
+    } else {
+      h += '<span class="pay-note">RSVP opens soon.</span>';
+      h += '<span class="pay-todo">No form yet &mdash; paste the dinner RSVP link in the settings panel.</span>';
+    }
+    h += "</div></div></section>";
 
     /* sponsor */
     h += '<section class="sec sec-sand" id="sponsor"><div class="wrap">';
@@ -929,6 +939,7 @@
     h += '<div class="f"><label for="f-mail">Contact email</label><input id="f-mail" type="email" data-field="meta.email" value="' + esc(STATE.meta.email) + '"></div>';
     h += '<div class="f"><label for="f-title">Browser tab title</label><input id="f-title" type="text" data-field="meta.title" value="' + esc(STATE.meta.title) + '"></div>';
     h += '<div class="f"><label for="f-form">Lightning Round form</label><input id="f-form" type="url" placeholder="https://docs.google.com/forms/..." data-field="meta.lightningFormUrl" value="' + esc(STATE.meta.lightningFormUrl || "") + '"></div>';
+    h += '<div class="f"><label for="f-dinner">Dinner RSVP form</label><input id="f-dinner" type="url" placeholder="https://forms.gle/..." data-field="meta.dinnerFormUrl" value="' + esc(STATE.meta.dinnerFormUrl || "") + '"></div>';
     STATE.register.tiers.forEach(function (t, i) {
       h += '<div class="f"><label for="f-pay' + i + '">Stripe link ' + esc(t.price) + '</label>' +
         '<input id="f-pay' + i + '" type="url" placeholder="https://buy.stripe.com/..." data-field="register.tiers.' + i + '.payUrl" value="' + esc(t.payUrl || "") + '"></div>';
