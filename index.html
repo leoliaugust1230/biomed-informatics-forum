@@ -373,7 +373,7 @@
   "slots": [
    {
     "time": "2:45 PM",
-    "title": "Check-in & registration",
+    "title": "Check-in & Registration",
     "note": "Oaks Ballroom foyer. On-site payment accepted depending on availability.",
     "dur": "",
     "key": false
@@ -381,7 +381,7 @@
    {
     "time": "3:00 PM",
     "title": "Opening remarks",
-    "note": "Hua Xu",
+    "note": "",
     "dur": "5 min",
     "key": false
    },
@@ -408,7 +408,7 @@
    },
    {
     "time": "5:15 PM",
-    "title": "Lightning talks",
+    "title": "Lightning Talks",
     "note": "Sponsor talk (5 min), Recruiting labs and companies (3 min) \u00b7 sign up by email to pitch",
     "dur": "30 min",
     "key": true
@@ -418,6 +418,13 @@
     "title": "Networking reception",
     "note": "Beer, wine and refreshments \u00b7 hosted by OneSource Cloud",
     "dur": "until 7:30 PM",
+    "key": false
+   },
+   {
+    "time": "",
+    "title": "",
+    "note": "",
+    "dur": "",
     "key": false
    }
   ]
@@ -650,8 +657,8 @@
   ]
  },
  "footer": {
-  "name": "International Forum on Biomedical Informatics, Data Science, and AI",
-  "blurb": "November 7, 2026 \u00b7 Dallas, Texas \u00b7 A satellite forum of the AMIA 2026 Annual Symposium, independently organized.",
+  "name": "2026 International Forum on Biomedical Informatics, Data Science, and AI",
+  "blurb": "November 7, 2026 \u00b7 Dallas, Texas\u00a0",
   "regText": "Register for the forum",
   "sponsorText": "Sponsored by OneSource Cloud",
   "credit": "Downtown Dallas photographed from Reunion Tower by IcedCowboyCoffee, released under CC0 via Wikimedia Commons."
@@ -776,6 +783,7 @@
     h += '<div class="agenda">';
     s.agenda.slots.forEach(function (sl, i) {
       var p = "agenda.slots." + i;
+      if (!EDITING && !sl.time && !sl.title && !sl.note && !sl.dur) return;
       h += '<div class="slot' + (sl.key ? " slot-key" : "") + '">' + tools("agenda.slots", i, { star: true });
       h += '<div class="slot-time"' + b(p + ".time") + ">" + esc(sl.time) + '</div><div class="slot-body">';
       h += '<div class="slot-title"' + b(p + ".title") + ">" + esc(sl.title) + "</div>";
