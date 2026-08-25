@@ -44,11 +44,11 @@ the markup or CSS.
 
 ## Receipt email
 
-`receipt-function/` holds a Cloudflare Worker that emails a confirmation after
-each Stripe payment - date, room, address, door time. It is not part of the
-site and does not run on GitHub Pages; it deploys separately. See
-`receipt-function/README.md`. Stripe's own payment receipt is automatic and
-independent of it.
+Registration receipts are Stripe's built-in automatic payment receipt
+(enabled in the Stripe Dashboard under Customer emails). No server or code
+runs for this. A branded event-detail receipt was drafted as a Cloudflare
+Worker but not deployed; that code lives outside this repo, one level up in
+`../receipt-function/`, if it is ever wanted.
 
 ## Registration and payment
 
