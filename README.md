@@ -61,6 +61,22 @@ The two link URLs live in the `state` JSON under `register.tiers[].payUrl`.
 Until a URL is set, that tier's button renders as an inert "Registration opens
 soon" placeholder rather than a broken link. Only `https://` URLs are accepted.
 
+## Custom domain
+
+The site is served at **biomedaiforum.org**. The `CNAME` file at the repo root
+holds that domain — GitHub Pages reads it to bind the site. Do not delete it.
+
+The domain is registered separately (at any registrar); GitHub only serves the
+files. At the registrar, the DNS records are:
+
+- Apex `biomedaiforum.org` → four A records:
+  `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+  (and the matching AAAA records for IPv6, listed in GitHub's Pages docs).
+- `www` → CNAME to `leoliaugust1230.github.io`.
+
+In the repo's **Settings → Pages**, set the custom domain to `biomedaiforum.org`
+and tick **Enforce HTTPS** once the certificate is issued (can take an hour).
+
 ## Updating
 
 Edit `index.html`, commit, and push. GitHub Pages redeploys in about a minute.
